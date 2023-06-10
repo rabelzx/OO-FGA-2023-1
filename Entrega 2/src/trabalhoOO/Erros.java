@@ -1,30 +1,24 @@
 package trabalhoOO;
 
-public class erros () {
-    float ValorP1
-    public float DescricaoEmBrancoException (String strValorP1){
+import javax.swing.*;
 
-        strValorP1 = JOptionPane.showInputDialog("");
-        if (strValorP1.length()==0) {
-            System.out.printf("DescricaoEmBrancoException");
-            break;
+public class Erros {
+    float ValorP1;
+    //Verifica se algum valor foi inserido
+    public float chkException(String strValorP1) {
+
+        if (strValorP1.length() == 0) {
+            System.out.printf("DescricaoEmBrancoException\n");
         }
         else {
-            valorP1 = Float.parseFloat(strValorP1);
-            return valorP1;
-        }
+            ValorP1 = Float.parseFloat(strValorP1);//Converte a String em Float para verificar se o valor é positivo
 
-    }
-    public float ValorAcessoInvalidoException (String strValorP1){
-        valorP1 = Float.parseFloat(strValorP1);
-        strValorP1 = JOptionPane.showInputDialog("");
-        if (ValorP1<=0) {
-            System.out.printf("ValorAcessoInvalidoException");
-            break;
-        }
-        else {
-            return ValorP1;
-        }
+            if (ValorP1 <= 0) {System.out.printf("ValorAcessoInvalidoException\n");}//Printa erro
 
+            else {System.out.printf("Registrado\n");
+                return ValorP1;
+            }
+        }
+        return ValorP1;
     }
 }
