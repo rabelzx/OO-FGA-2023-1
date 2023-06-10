@@ -19,6 +19,17 @@ public class Estacionamento {
 		return 0;
 	}
 
-
+	void setCapacidade(int capacidade){
+		this.capacidade = capacidade;
+	}
+	void setAbrir(Horario abrir){
+		this.abrir = abrir;
+	}
+	void setFechar(Horario fechar){
+		this.fechar = fechar;
+	}
+	void  setValCon(float valCon){
+		this.valCon = valCon;
+	}
 
 }
