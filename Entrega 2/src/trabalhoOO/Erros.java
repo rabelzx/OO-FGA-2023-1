@@ -12,8 +12,9 @@ public class Erros {
         }
         else {
             ValorP1 = Float.parseFloat(strValorP1);//Converte a String em Float para verificar se o valor é positivo
-
-            if (ValorP1 <= 0) {System.out.printf("ValorAcessoInvalidoException\n");}//Printa erro
+            if (ValorP1 <= 0) {//Verifica se o valor inserido é positivo
+                System.out.printf("ValorAcessoInvalidoException\n");//Printa erro
+            }
 
             else {System.out.printf("Registrado\n");
                 return ValorP1;
