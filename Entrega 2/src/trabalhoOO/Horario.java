@@ -13,6 +13,7 @@ public class Horario {
     void setHora(int hora){this.hora = hora;}
     void setMinuto(int minuto){this.minuto = minuto;}
 
+    //Função printa a Hora
     public String toString(){
         System.out.println(hora+";"+minuto);
         return null;
