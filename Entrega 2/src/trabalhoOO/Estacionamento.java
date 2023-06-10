@@ -5,7 +5,18 @@ public class Estacionamento {
 	private float valCon;
 	private Horario abrir;
 	private Horario fechar;
-	public Estacionamento() {}
-	
+
+	public Estacionamento() {} //Padrão
+	public Estacionamento(int c) {
+		capacidade = c;
+	}
+	public void cadastrarAcesso(){
+		//PlaceHolder
+	}
+	public float calcRetorno(){
+		return 0;
+	}
+
+
 
 }
