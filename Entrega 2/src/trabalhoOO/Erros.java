@@ -3,7 +3,7 @@ package trabalhoOO;
 import javax.swing.*;
 
 public class Erros {
-    float ValorP1;
+    private float ValorP1;
     //Verifica se algum valor foi inserido
     public float chkException(String strValorP1) {
 
