@@ -15,7 +15,7 @@ public class Horario {
 
     //Função printa a Hora
     public String toString(){
-        System.out.println(hora+";"+minuto);
+        System.out.printf(hora+":"+minuto);
         return null;
     }
 }
