@@ -7,8 +7,10 @@ public class Estacionamento {
 	private Horario fechar;
 
 	public Estacionamento() {} //Padrão
-	public Estacionamento(int capacidade) {
+	public Estacionamento(int capacidade, Horario abrir,Horario fechar) {
 		this.capacidade = capacidade;
+		this.abrir = abrir;
+		this.fechar = fechar;
 	}
 	public void cadastrarAcesso(){
 		//PlaceHolder
