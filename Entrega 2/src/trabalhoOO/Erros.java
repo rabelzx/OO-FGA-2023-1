@@ -19,6 +19,6 @@ public class Erros {
                 return ValorP1;
             }
         }
-        return ValorP1;
+        return 0;
     }
 }
