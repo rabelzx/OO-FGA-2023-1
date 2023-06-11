@@ -7,18 +7,16 @@ public class Estacionamento {
 	private Horario fechar;
 
 	public Estacionamento() {} //Padrão
-	public Estacionamento(int capacidade, Horario abrir,Horario fechar) {
+	public Estacionamento(int capacidade, Horario abrir,Horario fechar, float valCon) {
 		this.capacidade = capacidade;
 		this.abrir = abrir;
 		this.fechar = fechar;
+		this.valCon = valCon;
 	}
 	public void cadastrarAcesso(){
 		//PlaceHolder
 	}
-	public float calcRetorno(){
-		return valCon;
-	}
-
+	public float calcRetorno(){return 0;}
 	void setCapacidade(int capacidade){
 		this.capacidade = capacidade;
 	}
@@ -31,7 +29,6 @@ public class Estacionamento {
 	void  setValCon(float valCon){
 		this.valCon = valCon;
 	}
-
 	Horario getAbrir(){return abrir;}
 	Horario getFechar(){return fechar;}
 	int getCapacidade(){return capacidade;}
