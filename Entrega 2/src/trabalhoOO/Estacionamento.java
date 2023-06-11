@@ -16,7 +16,7 @@ public class Estacionamento {
 		//PlaceHolder
 	}
 	public float calcRetorno(){
-		return 0;
+		return valCon;
 	}
 
 	void setCapacidade(int capacidade){
@@ -34,5 +34,6 @@ public class Estacionamento {
 
 	Horario getAbrir(){return abrir;}
 	Horario getFechar(){return fechar;}
+	int getCapacidade(){return capacidade;}
 
 }
