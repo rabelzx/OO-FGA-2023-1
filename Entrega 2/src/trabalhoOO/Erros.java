@@ -1,25 +1,19 @@
 package trabalhoOO;
 
-import javax.swing.*;
+public class Erros extends Exception {
+    public Erros(String mensagem) {
+        super(mensagem);
+    }
 
-public class Erros {
-    private float ValorP1;
-    //Verifica se algum valor foi inserido
-    public float chkException(String strValorP1) {
-
-        if (strValorP1.length() == 0) {
-            System.out.printf("DescricaoEmBrancoException\n");
+    public static class DescricaoEmBrancoException extends Erros {
+        public DescricaoEmBrancoException() {
+            super("A descrição do acesso não foi informada.");
         }
-        else {
-            ValorP1 = Float.parseFloat(strValorP1);//Converte a String em Float para verificar se o valor é positivo
-            if (ValorP1 <= 0) {//Verifica se o valor inserido é positivo
-                System.out.printf("ValorAcessoInvalidoException\n");//Printa erro
-            }
+    }
 
-            else {System.out.printf("Registrado\n");
-                return ValorP1;
-            }
+    public static class ValorAcessoInvalidoException extends Erros {
+        public ValorAcessoInvalidoException() {
+            super("O valor do acesso é inválido.");
         }
-        return 0;
     }
 }
