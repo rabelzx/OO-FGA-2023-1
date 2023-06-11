@@ -29,6 +29,7 @@ public class Horario {
     //Sets e Gets
     void setHora(int hora){this.hora = hora;}
     void setMinuto(int minuto){this.minuto = minuto;}
+
     public String getHorario(){
         String horario = hora+":"+minuto;
         return horario;
