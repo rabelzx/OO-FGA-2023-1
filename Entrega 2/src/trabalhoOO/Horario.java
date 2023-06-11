@@ -25,11 +25,15 @@ public class Horario {
         }
     }
     //Função que une a hora com os minutos em uma string
-    public String unirHorario(){
+
+    //Sets e Gets
+    void setHora(int hora){this.hora = hora;}
+    void setMinuto(int minuto){this.minuto = minuto;}
+    public String getHorario(){
         String horario = hora+":"+minuto;
         return horario;
     }
-    //Sets
-    void setHora(int hora){this.hora = hora;}
-    void setMinuto(int minuto){this.minuto = minuto;}
+    public int getHora(){return hora;}
+
+    public int getMinuto(){return minuto;}
 }
