@@ -30,7 +30,7 @@ public class Acesso {
     		return price; 
     		
     	} else{
-    		int tempoPermanencia = diferencaMinutos(entrada, saida); 
+    		int tempoPermanencia =  Horario.diferencaMinutos(entrada, saida);
     		
     	}
         
