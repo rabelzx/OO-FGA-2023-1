@@ -6,15 +6,22 @@ public class Horario {
 
 
     public Horario(){}
-    public Horario(int hora, int minuto){
+
+    public Horario(int hora){
         if (hora >= 24 || hora < 0){
-            System.out.printf("\na Hora inserida é invalida!!\n");
-        } else if (minuto >= 60 || minuto < 0) {
+            System.out.printf("\na Hora inserida é invalida!!\n");}
+        else {
+            this.hora = hora;
+            System.out.printf("Hora Registrada com Sucesso\n");
+        }
+    }
+    public Horario(int hora, int minuto){
+        this(hora);
+        if (minuto >= 60 || minuto < 0) {
             System.out.printf("\nO minuto inserido é invalido!!\n");
         }else {
-            this.hora = hora;
             this.minuto = minuto;
-            System.out.printf("Hora Registrada com Sucesso\n");
+            System.out.printf("Minuto Registrada com Sucesso\n");
         }
     }
     //Função que une a hora com os minutos em uma string
