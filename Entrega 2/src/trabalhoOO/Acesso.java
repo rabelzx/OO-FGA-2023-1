@@ -12,34 +12,41 @@ public class Acesso {
     public Acesso() {}
 
     //construtor
-    public Acesso(String placa, boolean chkEvent, boolean chkMens, Horario entrada, Horario saida) {
+    public Acesso(String placa, boolean chkEvent, boolean chkMens, Horario entrada, Horario saida, Estacionamento estacionamento) {
         this.placa = placa;
         this.chkEvent = chkEvent;
         this.chkMens = chkMens;
         this.entrada = entrada;
         this.saida = saida;
-    }
-
-    public float calcPrice() {
-    	if(chkMens){
-    		float price = getMens();
-    		return price; 
-    		
-    	} else if(chkEvent){
-    		float price = getEvent(); 
-    		return price; 
-    		
-    	} else{
-    		int tempoPermanencia =  Horario.diferencaMinutos(entrada, saida);
-    		
-    	}
         
-    return 0;}
-
-   
+        int tempoPermanencia =  Horario.diferencaMinutos(entrada, saida);
+        
+        if(chkMens) {
+        	this.valorTotal = Valores.getEvento(); 
+        } else if(chkEvent) {
+        	this.valorTotal = Valores.getMensalista(); 
+        } else {
+        	if(entrada.getHora() > estacionamento.getFechar().getHora() && saida.getHora() < estacionamento.getAbrir().getHora()) {
+        		this.valorTotal = Valores.getDiurna() * Valores.getNoturna(); 
+        	} else {        		
+        		if(tempoPermanencia > 0 && tempoPermanencia < 60) {
+        			int valorFracao = tempoPermanencia / 15; 
+        			this.valorTotal = valorFracao * Valores.getFracao();
+        		} else if(tempoPermanencia >= 60 && tempoPermanencia <= 540) {
+        			int horasCheias = tempoPermanencia / 60; 
+        			int minutosRestantes = (tempoPermanencia - horasCheias * 60) / 15;
+        			
+        			horasCheias = ((horasCheias * 60) / 15) * Valores.getFracao(); 
+        			this.valorTotal = horasCheias * Valores.getHora_cheia() + minutosRestantes * Valores.getFracao(); 
+        		} else if(tempoPermanencia > 540) {
+        			this.valorTotal = Valores.getDiurna(); 
+        		}
+        	}
+        }
+    }
     
-
     // getters e setters
+    
     //placa
     public String getPlaca() {
         return placa;
