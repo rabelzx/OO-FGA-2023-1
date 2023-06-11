@@ -5,30 +5,41 @@ public class Acesso {
     private boolean chkEvent;
     private boolean chkMens;
     private float valorTotal;
-    private Horario in;
-    private Horario out;
+    private Horario entrada;
+    private Horario saida;
 
     //construtor vazio
     public Acesso() {}
 
     //construtor
-    public Acesso(String placa, boolean chkEvent, boolean chkMens, Horario in, Horario out) {
+    public Acesso(String placa, boolean chkEvent, boolean chkMens, Horario entrada, Horario saida) {
         this.placa = placa;
         this.chkEvent = chkEvent;
         this.chkMens = chkMens;
-        this.in = in;
-        this.out = out;
+        this.entrada = entrada;
+        this.saida = saida;
     }
 
-    public void calcPrice() {
-        // -------------
-    	// -------------
-    	// -------------
+    public float calcPrice() {
+    	if(chkMens){
+    		float price = getMens();
+    		return price; 
+    		
+    	} else if(chkEvent){
+    		float price = getEvent(); 
+    		return price; 
+    		
+    	} else{
+    		int tempoPermanencia = diferencaMinutos(entrada, saida); 
+    		
+    	}
+        
     }
 
    
-    // getters e setters
     
+
+    // getters e setters
     //placa
     public String getPlaca() {
         return placa;
@@ -66,20 +77,20 @@ public class Acesso {
     }
 
     //in e out
-    public Horario getIn() {
-        return in;
+    public Horario getEntrada() {
+        return entrada;
     }
 
-    public void setIn(Horario in) {
-        this.in = in;
+    public void setEntrada(Horario entrada) {
+        this.entrada = entrada;
     }
 
-    public Horario getOut() {
-        return out;
+    public Horario getSaida() {
+        return saida;
     }
 
-    public void setHorarioSaida(Horario out) {
-        this.out = out;
+    public void setSaida(Horario saida) {
+        this.saida = saida;
     }
 
 }

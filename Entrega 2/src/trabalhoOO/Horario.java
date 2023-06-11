@@ -23,6 +23,14 @@ public class Horario {
             System.out.printf("Minuto Registrada com Sucesso\n");
         }
     }
+    
+    //Função para calcular a diferença de tempo em minutos
+    public int diferencaMinutos(Horario entrada, Horario saida) {
+        int minutosEntrada = entrada.getHora() * 60 + entrada.getMinuto();
+        int minutosSaida = saida.getHora() * 60 + saida.getMinuto();
+        return minutosSaida - minutosEntrada;
+    }
+    
     //Função que une a hora com os minutos em uma string
 
     //Sets e Gets
