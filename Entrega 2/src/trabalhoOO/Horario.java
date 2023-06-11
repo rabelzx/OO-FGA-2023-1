@@ -25,7 +25,7 @@ public class Horario {
     }
     
     //Função para calcular a diferença de tempo em minutos
-    public int diferencaMinutos(Horario entrada, Horario saida) {
+    public static int diferencaMinutos(Horario entrada, Horario saida) {
         int minutosEntrada = entrada.getHora() * 60 + entrada.getMinuto();
         int minutosSaida = saida.getHora() * 60 + saida.getMinuto();
         return minutosSaida - minutosEntrada;
