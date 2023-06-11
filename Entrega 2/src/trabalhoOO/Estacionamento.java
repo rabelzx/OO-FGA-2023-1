@@ -27,7 +27,7 @@ public class Estacionamento {
 					if (valorAcesso <= 0) {
 						throw new Erros.ValorAcessoInvalidoException();
 					}
-					acessos.add(Horario);
+					acessos.add(horario);
 					System.out.println("Acesso cadastrado com sucesso.");
 				} catch (Erros.DescricaoEmBrancoException | Erros.ValorAcessoInvalidoException e) {
 					System.out.println(e.getMessage());
