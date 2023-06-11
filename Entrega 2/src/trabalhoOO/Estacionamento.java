@@ -16,7 +16,7 @@ public class Estacionamento {
 		this.valCon = valCon;
 	}
 	public void cadastrarAcesso() {
-		if (horario.estaEntre(abrir, fechar)) {
+		if (Horario.diferencaMinutos(abrir,fechar) > 0) {
 			// Verificar se o estacionamento está lotado
 			if (acessos.size() <= capacidade) {
 				// Realizar o cadastro do acesso
@@ -27,7 +27,7 @@ public class Estacionamento {
 					if (valorAcesso <= 0) {
 						throw new Erros.ValorAcessoInvalidoException();
 					}
-					acessos.add(horario);
+					acessos.add(Horario);
 					System.out.println("Acesso cadastrado com sucesso.");
 				} catch (Erros.DescricaoEmBrancoException | Erros.ValorAcessoInvalidoException e) {
 					System.out.println(e.getMessage());
