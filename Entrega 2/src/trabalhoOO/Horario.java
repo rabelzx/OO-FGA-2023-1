@@ -11,7 +11,7 @@ public class Horario {
             System.out.printf("\na Hora inserida é invalida!!\n");}
         else {
             this.hora = hora;
-            System.out.printf("Hora Registrada com Sucesso\n");
+            System.out.printf("\nHora Registrada com Sucesso\n");
         }
     }
     public Horario(int hora, int minuto){
