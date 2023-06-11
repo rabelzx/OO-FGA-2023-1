@@ -32,4 +32,7 @@ public class Estacionamento {
 		this.valCon = valCon;
 	}
 
+	Horario getAbrir(){return abrir;}
+	Horario getFechar(){return fechar;}
+
 }
