@@ -12,40 +12,40 @@ public class Acesso {
     public Acesso() {}
 
     //construtor
-    public Acesso(String placa, boolean chkEvent, boolean chkMens, Horario entrada, Horario saida, Estacionamento estacionamento) {
+    public Acesso(String placa, boolean chkEvent, boolean chkMens, Horario entrada, Horario saida, Estacionamento estacionamento, Valores valores) {
         this.placa = placa;
         this.chkEvent = chkEvent;
         this.chkMens = chkMens;
         this.entrada = entrada;
         this.saida = saida;
-        
+        this.valorTotal = calcPrice(estacionamento, valores); 
+    }
+    
+    public float calcPrice(Estacionamento estacionamento, Valores valores) {
         int tempoPermanencia =  Horario.diferencaMinutos(entrada, saida);
         
-        if(chkMens) {
-        	this.valorTotal = Valores.getEvento(); 
-        } else if(chkEvent) {
-        	this.valorTotal = Valores.getMensalista(); 
-        } else {
-        	if(entrada.getHora() > estacionamento.getFechar().getHora() && saida.getHora() < estacionamento.getAbrir().getHora()) {
-        		this.valorTotal = Valores.getDiurna() * Valores.getNoturna(); 
-        	} else {        		
+        if(chkMens) 
+        	return valores.getEvento(); 
+        else if(chkEvent) 
+        	return valores.getMensalista(); 
+        else {
+        	if(entrada.getHora() > estacionamento.getFechar().getHora() && saida.getHora() < estacionamento.getAbrir().getHora())
+        		return valores.getDiurna() * valores.getNoturna(); 
+        	else {        		
         		if(tempoPermanencia > 0 && tempoPermanencia < 60) {
         			int valorFracao = tempoPermanencia / 15; 
-        			this.valorTotal = valorFracao * Valores.getFracao();
+        			return valorFracao * valores.getFracao();
         		} else if(tempoPermanencia >= 60 && tempoPermanencia <= 540) {
         			int horasCheias = tempoPermanencia / 60; 
-        			int minutosRestantes = (tempoPermanencia - horasCheias * 60) / 15;
-        			
-        			horasCheias = ((horasCheias * 60) / 15) * Valores.getFracao(); 
-        			this.valorTotal = horasCheias * Valores.getHora_cheia() + minutosRestantes * Valores.getFracao(); 
-        		} else if(tempoPermanencia > 540) {
-        			this.valorTotal = Valores.getDiurna(); 
-        		}
+        			int fracaoCheia = (tempoPermanencia - horasCheias * 60) / 15;
+        			return ((horasCheias * 4) * valores.getFracao()) * valores.getHora_cheia() + fracaoCheia * valores.getFracao();     			
+        		} else
+        			return valores.getDiurna(); 			
         	}
         }
     }
     
-    // getters e setters
+    // --------------------getters e setters----------------------------
     
     //placa
     public String getPlaca() {
