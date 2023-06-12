@@ -38,7 +38,7 @@ public class Acesso {
         		} else if(tempoPermanencia >= 60 && tempoPermanencia <= 540) {
         			int horasCheias = tempoPermanencia / 60; 
         			int fracaoCheia = (tempoPermanencia - horasCheias * 60) / 15;
-        			return ((horasCheias * 4) * valores.getFracao()) * valores.getHora_cheia() + fracaoCheia * valores.getFracao();     			
+        			return horasCheias * valores.getHora_cheia() + fracaoCheia * valores.getFracao();     			
         		} else
         			return valores.getDiurna(); 			
         	}
