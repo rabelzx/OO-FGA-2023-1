@@ -20,8 +20,8 @@ public class Estacionamento {
 		this.fechar = fechar;
 		this.valCon = valCon;
 	}
-	public void cadastrarAcesso(String placa, Boolean evento, Boolean mensalista, Horario entrada, Horario saida) {
-		acessos[quantidade_Acessos] = new Acesso(placa,evento,mensalista,entrada,saida,valores,abrir,fechar);
+	public void cadastrarAcesso(String placa, Boolean evento, Boolean mensalista,Data data, Horario entrada, Horario saida) {
+		acessos[quantidade_Acessos] = new Acesso(placa,evento,mensalista,entrada,saida,data,valores,abrir,fechar);
 		quantidade_Acessos++;
 	}
 
