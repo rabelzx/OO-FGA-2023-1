@@ -1,6 +1,8 @@
 package trabalhoOO;
 
 
+import javax.swing.*;
+
 public class Estacionamento {
 	private int capacidade;
 	private float valCon;
@@ -20,7 +22,20 @@ public class Estacionamento {
 	public void cadastrarAcesso(String placa, Boolean evento, Boolean mensalista, Horario entrada, Horario saida) {
 		acesso = new Acesso(placa,evento,mensalista,entrada,saida,valores,abrir,fechar);
 	}
-	public float calcRetorno(){return 0;}
+
+	public void cadastrarValores(float fracao,float hora_cheia, int diurnapercent,int noturnapercent, float mensalidade, float evento){
+		float diurna = (diurnapercent/100), noturna = (noturnapercent/100);
+		valores = new Valores(fracao,hora_cheia,diurna,noturna,mensalidade,evento);
+	}
+	public float calcRetorno(){
+		int contratantePercent;
+
+		String strCon;
+		strCon = JOptionPane.showInputDialog("Insira o quanto o contratante irá receber de volta em porcentagem: exemplo 50%");
+		contratantePercent = Integer.parseInt(strCon);
+
+		return contratantePercent/100;
+	}
 	//====================================================================================
 	//Sets e Gets
 	//====================================================================================

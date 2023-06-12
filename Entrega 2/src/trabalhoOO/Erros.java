@@ -16,11 +16,7 @@ public class Erros extends Exception {
             super("O valor do acesso é inválido.");
         }
     }
-    public static class HorarioInvalidoException extends Erros {
-        public HorarioInvalidoException() {
-            super("O valor do acesso é inválido.");
-        }
-    }
+
 
 
 }
