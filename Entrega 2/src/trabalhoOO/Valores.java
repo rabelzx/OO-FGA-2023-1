@@ -16,7 +16,7 @@ public class Valores {
     
     public Valores(){}
 
-    public Valores(float fracao, float diurna, float mensalista, float evento, float retorno, float desHora) {
+    public Valores(float fracao, float diurna,float desNoturno, float mensalista, float evento, float retorno, float desHora) {
         this.fracao = fracao;
         this.diurna = diurna;
         this.mensalista = mensalista;
