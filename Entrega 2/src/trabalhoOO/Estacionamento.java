@@ -6,6 +6,7 @@ public class Estacionamento {
 	private float valCon;
 	private Horario abrir;
 	private Horario fechar;
+	Acesso acesso
 
 
 	public Estacionamento() {} //Padrão
@@ -15,10 +16,8 @@ public class Estacionamento {
 		this.fechar = fechar;
 		this.valCon = valCon;
 	}
-	public void cadastrarAcesso() {
-		if (Horario.diferencaMinutos(abrir,fechar) > 0) {}
-
-		else {System.out.println("O estacionamento está fechado. Acesso não permitido.");}
+	public void cadastrarAcesso(String placa, Boolean evento, Boolean mensalista, Horario entrada, Horario saida) {
+		acesso = new Acesso(placa,evento,mensalista,entrada,saida,abrir,fechar);
 	}
 	public float calcRetorno(){return 0;}
 	//====================================================================================

@@ -12,7 +12,7 @@ public class Acesso {
     public Acesso() {}
 
     //construtor
-    public Acesso(String placa, boolean chkEvent, boolean chkMens, Horario entrada, Horario saida, Estacionamento estacionamento) {
+    public Acesso(String placa, boolean chkEvent, boolean chkMens, Horario entrada, Horario saida, Horario abrir, Horario fechar) {
         this.placa = placa;
         this.chkEvent = chkEvent;
         this.chkMens = chkMens;
@@ -22,11 +22,11 @@ public class Acesso {
         int tempoPermanencia =  Horario.diferencaMinutos(entrada, saida);
         
         if(chkMens) {
-        	this.valorTotal = Valores.getEvento(); 
+        	this.valorTotal = Valores.getEvento();
         } else if(chkEvent) {
         	this.valorTotal = Valores.getMensalista(); 
         } else {
-        	if(entrada.getHora() > estacionamento.getFechar().getHora() && saida.getHora() < estacionamento.getAbrir().getHora()) {
+        	if(entrada.getHora() > fechar.getHora() && saida.getHora() < abrir.getHora()) {
         		this.valorTotal = Valores.getDiurna() * Valores.getNoturna(); 
         	} else {        		
         		if(tempoPermanencia > 0 && tempoPermanencia < 60) {
