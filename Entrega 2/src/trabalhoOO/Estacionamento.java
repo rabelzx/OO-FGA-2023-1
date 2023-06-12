@@ -29,14 +29,23 @@ public class Estacionamento {
 		float diurna = (diurnapercent/100), noturna = (noturnapercent/100);
 		valores = new Valores(fracao,hora_cheia,diurna,noturna,mensalidade,evento);
 	}
-	public float calcRetorno(int contratantePercent){
+	public float calcRetorno(int contratantePercent) {
 		int retorno = 0;
-		for (int i = 0; i < quantidade_Acessos; i++){
-			retorno += acessos[i].calcPrice(abrir,fechar,valores);
+		for (int i = 0; i < quantidade_Acessos; i++) {//Verífica todos os acessos
+			if (acessos[i].getChkMens()) {//Verifica se o acesso é de uma placa mensalista
+				for (int j = 0; j < i; j++) {//Varre o vetor até o ponto que estamos na verificação
+					if (acessos[i].getPlaca() == acessos[j].getPlaca()) { //Verifica se o carro já fez uma acesso no mês
+						i++; //caso ele tenha feito outro acesso no mês ele passa para o próximo no vetor
+					}
+					else {//Caso contrário ele adiciona o acesso mensal ao montante
+						retorno += acessos[i].calcPrice(abrir, fechar, valores);//Adiciona o que o carro pagou ao montante
+					}
 
+				}
+			}
+			else{retorno += acessos[i].calcPrice(abrir, fechar, valores);}//Adiciona o que o carro pagou ao montante
 		}
-
-		return retorno*valCon;
+		return retorno * valCon;//Retorna o quanto o contratante recebeu
 	}
 	//====================================================================================
 	//Sets e Gets
