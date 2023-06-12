@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Estacionamento {
+	private String nome;
 	private int capacidade;
 	private float valCon;
 	private Horario abrir;
@@ -15,11 +16,13 @@ public class Estacionamento {
 	private int quantidade_Acessos=0;
 
 	public Estacionamento() {} //Padrão
-	public Estacionamento(int capacidade, Horario abrir,Horario fechar, float valCon) {
+	public Estacionamento(String nome, int capacidade, Horario abrir,Horario fechar, float valCon) {
+
 		this.capacidade = capacidade;
 		this.abrir = abrir;
 		this.fechar = fechar;
 		this.valCon = valCon;
+		this.nome = nome;
 	}
 	public void cadastrarAcesso(String placa, Boolean evento, Boolean mensalista,Data data, Horario entrada, Horario saida) {
 		acessos.set(quantidade_Acessos, new Acesso(placa, evento, mensalista, entrada, saida, data, valores, abrir, fechar));
@@ -54,16 +57,12 @@ public class Estacionamento {
 	//====================================================================================
 	//Sets e Gets
 	//====================================================================================
-	void setCapacidade(int capacidade){
-		this.capacidade = capacidade;
-	}
-	void setAbrir(Horario abrir){
-		this.abrir = abrir;
-	}
+	void setCapacidade(int capacidade){this.capacidade = capacidade;}
+	void setNome(String nome){this.nome = nome;}
+	void setAbrir(Horario abrir){this.abrir = abrir;}
 	void setFechar(Horario fechar){this.fechar = fechar;}
-	void  setValCon(float valCon){
-		this.valCon = valCon;
-	}
+	void  setValCon(float valCon){this.valCon = valCon;}
+	String getNome(){return nome;}
 	Horario getAbrir(){return abrir;}
 	Horario getFechar(){return fechar;}
 	int getCapacidade(){return capacidade;}
