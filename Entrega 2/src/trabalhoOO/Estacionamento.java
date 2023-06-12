@@ -6,7 +6,8 @@ public class Estacionamento {
 	private float valCon;
 	private Horario abrir;
 	private Horario fechar;
-	Acesso acesso
+	Acesso acesso;
+	Valores valores;
 
 
 	public Estacionamento() {} //Padrão
@@ -17,7 +18,7 @@ public class Estacionamento {
 		this.valCon = valCon;
 	}
 	public void cadastrarAcesso(String placa, Boolean evento, Boolean mensalista, Horario entrada, Horario saida) {
-		acesso = new Acesso(placa,evento,mensalista,entrada,saida,abrir,fechar);
+		acesso = new Acesso(placa,evento,mensalista,entrada,saida,valores,abrir,fechar);
 	}
 	public float calcRetorno(){return 0;}
 	//====================================================================================

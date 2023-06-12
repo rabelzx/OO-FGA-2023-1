@@ -12,24 +12,24 @@ public class Acesso {
     public Acesso() {}
 
     //construtor
-    public Acesso(String placa, boolean chkEvent, boolean chkMens, Horario entrada, Horario saida, Estacionamento estacionamento, Valores valores) {
+    public Acesso(String placa, boolean chkEvent, boolean chkMens, Horario entrada, Horario saida, Valores valores, Horario abrir, Horario fechar) {
         this.placa = placa;
         this.chkEvent = chkEvent;
         this.chkMens = chkMens;
         this.entrada = entrada;
         this.saida = saida;
-        this.valorTotal = calcPrice(estacionamento, valores); 
+        this.valorTotal = calcPrice(abrir,fechar, valores);
     }
     
-    public float calcPrice(Estacionamento estacionamento, Valores valores) {
+    public float calcPrice(Horario abrir, Horario fechar, Valores valores) {
         int tempoPermanencia =  Horario.diferencaMinutos(entrada, saida);
         
         if(chkMens) 
-        	return valores.getEvento(); 
-        else if(chkEvent) 
-        	return valores.getMensalista(); 
+        	return valores.getMensalista();
+        else if(chkEvent)
+        	return valores.getEvento();
         else {
-        	if(entrada.getHora() > estacionamento.getFechar().getHora() && saida.getHora() < estacionamento.getAbrir().getHora())
+        	if(entrada.getHora() > fechar.getHora() && saida.getHora() < abrir.getHora())
         		return valores.getDiurna() * valores.getNoturna(); 
         	else {        		
         		if(tempoPermanencia > 0 && tempoPermanencia < 60) {
