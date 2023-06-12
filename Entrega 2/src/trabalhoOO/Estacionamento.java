@@ -8,6 +8,8 @@ public class Estacionamento {
 	private String nome;
 	private int capacidade;
 	private float valCon;
+
+	private float retornoCon = calcRetorno();
 	private Horario abrir;
 	private Horario fechar;
 	ArrayList<Acesso> acessos = new ArrayList<>();
@@ -29,12 +31,12 @@ public class Estacionamento {
 		quantidade_Acessos++;
 	}
 
-	public void cadastrarValores(float fracao,int desHora, float diurna,int noturnapercent, float mensalidade, float evento){
-		float noturna = (noturnapercent/100), hora_cheia = desHora/100;
-		valores = new Valores(fracao,hora_cheia,diurna,noturna,mensalidade,evento);
+	public void cadastrarValores(float fracao,int desHora, float diurna, float mensalidade, float evento){
+		float descontoHora = desHora/100;
+		valores = new Valores(fracao,diurna,mensalidade,evento,retornoCon,descontoHora);
 	}
 	//Calcula o retorno do contratante
-	public float calcRetorno(int contratantePercent) {
+	public float calcRetorno() {
 		int retorno = 0;
 		for (int i = 0; i < quantidade_Acessos; i++) {//Verífica todos os acessos
 
