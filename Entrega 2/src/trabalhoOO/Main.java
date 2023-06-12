@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
     	
     	ArrayList<Estacionamento> estacionamentos = new ArrayList<>( );
+    	ArrayList<Acesso> acessos = new ArrayList<>( );
     	
     	
         int opcao;
@@ -22,7 +23,7 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    cadastrarOpcoes(estacionamentos);
+                    cadastrarOpcoes(estacionamentos, acessos);
                     break;
                 case 2:
                     buscarOpcoes();
@@ -41,7 +42,7 @@ public class Main {
         } while (opcao != 0);
     }
 
-    public static void cadastrarOpcoes(ArrayList<Estacionamento> estacionamentos) {
+    public static void cadastrarOpcoes(ArrayList<Estacionamento> estacionamentos, ArrayList<Acesso> acessos ) {
     	
     	
         int opcao;
@@ -84,17 +85,36 @@ public class Main {
             	    JOptionPane.showMessageDialog(null, "Estacionamento cadastrado com sucesso!");
                     break;
                 case 2:
+                	String nomesEstacionamentos = new String();  
+                    for(int i = 0; i < estacionamentos.size(); i++) 
+                    	nomesEstacionamentos += (i+" - "+estacionamentos.get(i).getNome()+"\n"); 
+                    int escolhaEstacionamento = Integer.parseInt(JOptionPane.showInputDialog(null, "Qual o estacionamento do acesso?\n" + nomesEstacionamentos,  JOptionPane.PLAIN_MESSAGE));
+                 
                 	String placa = JOptionPane.showInputDialog(null, "Insira a placa do veículo:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE);
                 	int horaEntrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de início do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
                     int minutosEntrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de início do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
                     int horaSaida = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de saída do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
                     int minutosSaida = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de saída do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
                     
+                    int diaAcesso = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    int mesAcesso =  Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    int anoAcesso = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE)); 
+                    
+                    int eventoResposta = JOptionPane.showOptionDialog(null, "O acesso é do tipo evento?", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sim", "Não"}, null);
+                    boolean eventoChk = (eventoResposta == JOptionPane.YES_OPTION);
+                   
+                    int mensalistaResposta = JOptionPane.showOptionDialog(null, "O acesso é do tipo mensalista", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sim", "Não"}, null);
+                    boolean mensChk = (mensalistaResposta == JOptionPane.YES_OPTION);
+                    
+                    
                     Horario entrada = new Horario(horaEntrada, minutosEntrada); 
                     Horario saida = new Horario(horaSaida, minutosSaida); 
                     
-                	
-                	 JOptionPane.showMessageDialog(null, "Estacionamento cadastrado com sucesso!");
+                    Data dtAcesso = new Data(diaAcesso, mesAcesso, anoAcesso); 
+                    
+                    estacionamentos.get(escolhaEstacionamento).cadastrarAcesso(placa, eventoChk, mensChk, dtAcesso, entrada, saida);
+                    
+                	JOptionPane.showMessageDialog(null, "Estacionamento cadastrado com sucesso!");
                     break;
                 case 3: 
                 	String evento = JOptionPane.showInputDialog(null, "Insira o nome do evento:", "Cadastar Evento", JOptionPane.PLAIN_MESSAGE);
