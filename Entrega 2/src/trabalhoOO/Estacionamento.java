@@ -31,7 +31,7 @@ public class Estacionamento {
 		quantidade_Acessos++;
 	}
 
-	public void cadastrarValores(float fracao,int desNoturno,int desHora, float diurna, float mensalidade, float evento){
+	public void cadastrarValores(float fracao, int desNoturno,int desHora, float diurna, float mensalidade, float evento){
 		float descontoHora = desHora/100, descontoNoturno = desNoturno/100;
 		valores = new Valores(fracao,diurna,descontoNoturno,mensalidade,evento,retornoCon,descontoHora);
 	}
