@@ -29,8 +29,8 @@ public class Estacionamento {
 		quantidade_Acessos++;
 	}
 
-	public void cadastrarValores(float fracao,float hora_cheia, int diurnapercent,int noturnapercent, float mensalidade, float evento){
-		float diurna = (diurnapercent/100), noturna = (noturnapercent/100);
+	public void cadastrarValores(float fracao,int desHora, float diurna,int noturnapercent, float mensalidade, float evento){
+		float noturna = (noturnapercent/100), hora_cheia = desHora/100;
 		valores = new Valores(fracao,hora_cheia,diurna,noturna,mensalidade,evento);
 	}
 	//Calcula o retorno do contratante
