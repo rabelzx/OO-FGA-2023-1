@@ -17,8 +17,8 @@ public class Estacionamento {
 		this.fechar = fechar;
 		this.valCon = valCon;
 	}
-	public void cadastrarAcesso(String placa, Boolean evento, Boolean mensalista, Horario entrada, Horario saida) {
-		acesso = new Acesso(placa,evento,mensalista,entrada,saida,valores,abrir,fechar);
+	public void cadastrarAcesso(String placa, Boolean evento, Boolean mensalista, Horario entrada, Horario saida, Data dtAcesso) {
+		acesso = new Acesso(placa, evento, mensalista, entrada, saida, dtAcesso, valores, abrir, fechar);
 	}
 	public float calcRetorno(){return 0;}
 	//====================================================================================
