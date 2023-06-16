@@ -19,12 +19,16 @@ public class Estacionamento {
 
 	public Estacionamento() {} //Padrão
 	public Estacionamento(String nome, int capacidade, Horario abrir,Horario fechar, float valCon) {
-
+		if (capacidade <= 0){
+			throw new RuntimeException("Capacidade inválida");
+		}
+		else{
 		this.capacidade = capacidade;
 		this.abrir = abrir;
 		this.fechar = fechar;
 		this.valCon = valCon;
 		this.nome = nome;
+		}
 	}
 	public void cadastrarAcesso(String placa, Boolean evento, Boolean mensalista,Data data, Horario entrada, Horario saida) {
 		acessos.set(quantidade_Acessos, new Acesso(placa, evento, mensalista, entrada, saida, data, valores, abrir, fechar));
@@ -43,7 +47,7 @@ public class Estacionamento {
 			if (acessos.get(i).getChkMens()) {//Verifica se o acesso é de uma placa mensalista
 				for (int j = 0; j < i; j++) {//Varre o vetor até o ponto que estamos na verificação
 
-					if (acessos.get(i).getPlaca() == acessos.get(j).getPlaca()) { //Verifica se o carro já fez uma acesso no mês
+					if (acessos.get(i).getPlaca() == acessos.get(j).getPlaca()) { //Verifica se o carro já fez uma acesso
 						i++;} //caso ele tenha feito outro acesso no mês ele passa para o próximo no vetor
 
 					else {//Caso contrário ele adiciona o acesso mensal ao montante

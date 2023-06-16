@@ -9,19 +9,19 @@ public class Data {
 
     public Data(int dia, int mes, int ano) {
         if (dia < 1 || dia > 31) {
-            System.out.printf("\nDia inserido inválido!\n");
+            throw new RuntimeException("\nDia inserido inválido!\n");
         } else {
             this.dia = dia;
         }
 
         if (mes < 1 || mes > 12) {
-            System.out.printf("\nMês inserido inválido!\n");
+            throw new RuntimeException("\nMês inserido inválido!\n");
         } else {
             this.mes = mes;
         }
 
         if (ano < 1800 || ano > 2023) {
-            System.out.printf("\nAno inserido inválido!\n");
+            throw new RuntimeException("\nAno inserido inválido!\n");
         } else {
             this.ano = ano;
         }

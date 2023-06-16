@@ -43,8 +43,8 @@ public class Main {
     }
 
     public static void cadastrarOpcoes(ArrayList<Estacionamento> estacionamentos, ArrayList<Acesso> acessos ) {
-    	
-    	
+
+
         int opcao;
 
         do {
@@ -62,9 +62,25 @@ public class Main {
                     int capacidade = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a capacidade do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
                     int horaAbertura = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de abertura do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
                     int minutosAbertura = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de abertura do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
+                        //Verífica se existem erros no Horário de abertura
+                    try {
+                        new Horario(horaAbertura, minutosAbertura);
+                    }
+                    catch (RuntimeException HoraInvalida){
+                        HoraInvalida.getMessage();
+                    }
+                    Horario horarioAbertura = new Horario(horaAbertura, minutosAbertura);//Se a verificação passar ele instancia
                     int horaEncerramento = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de encerramento do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
                     int minutosEncerramento = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de encerramento do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
-                    
+                    //Verifica se existem erros no Horário de Fechamento
+                    try {
+                        new Horario(horaEncerramento, minutosEncerramento);
+                    }
+                    catch (RuntimeException HoraInvalida){
+                        HoraInvalida.getMessage();
+                    }
+                    Horario horarioEncerramento = new Horario(horaEncerramento, minutosEncerramento);//Se a verificação passar ele instancia
+
                     int valorContratante = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a porcentagem de retorno do contratante:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
                     float fracao = Float.parseFloat(JOptionPane.showInputDialog(null, "Insira o valor da fracao:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
                     int descontaHora = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a porcentagem de desconta da hora cheia:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
@@ -74,10 +90,8 @@ public class Main {
                     float valorEvento = Float.parseFloat(JOptionPane.showInputDialog(null, "Insirao valor do evento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
                     
                     float valorContratantePct = valorContratante / 100; 
-                    
-                    Horario horarioAbertura = new Horario(horaAbertura, minutosAbertura);
-                    Horario horarioEncerramento = new Horario(horaEncerramento, minutosEncerramento);
-                    
+
+
                     Estacionamento estacionamentoNovo = new Estacionamento(nomeEstacionamento, capacidade, horarioAbertura, horarioEncerramento, valorContratantePct);
                     estacionamentoNovo.cadastrarValores(fracao,  descontoNoturna, descontaHora, diurna, mensalidade, valorEvento );
                     

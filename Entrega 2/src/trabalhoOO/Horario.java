@@ -8,19 +8,19 @@ public class Horario {
 
     public Horario(int hora){
         if (hora >= 24 || hora < 0){
-            System.out.printf("\na Hora inserida é invalida!!\n");}
+            throw new RuntimeException("\na Hora inserida é invalida!!\n");}
         else {
             this.hora = hora;
-            System.out.printf("\nHora Registrada com Sucesso\n");
+
         }
     }
     public Horario(int hora, int minuto){
         this(hora);
         if (minuto >= 60 || minuto < 0) {
-            System.out.printf("\nO minuto inserido é invalido!!\n");
+            throw new RuntimeException("\nO minuto inserido é invalido!!\n");
         }else {
             this.minuto = minuto;
-            System.out.printf("Minuto Registrada com Sucesso\n");
+
         }
     }
     
