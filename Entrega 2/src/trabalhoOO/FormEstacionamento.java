@@ -11,7 +11,7 @@ public class FormEstacionamento extends JFrame implements ActionListener {
             horaAbertura_Field, minutoAbertura_Field, horaFechamento_Field, minutoFechamento_Field,
             valorContratante_field,capacidade_Field;
     public FormEstacionamento() {
-        int screenHeight = 300, screenWidth = 400;
+        int screenHeight = 280, screenWidth = 400;
         //Constroi a interface
         setTitle("Cadastrar estacionamento");
         setVisible(true);
@@ -25,12 +25,12 @@ public class FormEstacionamento extends JFrame implements ActionListener {
 
         //Botão de Cancelar
         JButton Cancelar = new JButton("Cancelar");
-        Cancelar.setBounds(screenWidth-150,screenHeight-100,100,40);
+        Cancelar.setBounds(screenWidth-150,screenHeight-100,100,30);
         add(Cancelar);
         Cancelar.addActionListener(this::Cancelar);
         //Botão de Confirmar
         JButton Confirmar = new JButton("Confirmar");
-        Confirmar.setBounds(screenWidth-250,screenHeight-100,100,40);
+        Confirmar.setBounds(screenWidth-250,screenHeight-100,100,30);
         add(Confirmar);
         Confirmar.addActionListener(this);
 
@@ -39,7 +39,7 @@ public class FormEstacionamento extends JFrame implements ActionListener {
         nome.setFont(new Font("Arial", Font.BOLD,20));
         nome.setBounds(1,1,70,40);
         fieldNome = new JTextField();
-        fieldNome.setBounds(70,1,300,40);
+        fieldNome.setBounds(70,1,300,30);
         add(fieldNome);
         add(nome);
 
@@ -49,12 +49,12 @@ public class FormEstacionamento extends JFrame implements ActionListener {
         horaAbertura.setFont(new Font("Arial", Font.BOLD,16));
         horaAbertura.setBounds(1,50,70,40);
         horaAbertura_Field = new JTextField();
-        horaAbertura_Field.setBounds(70,50,40,40);
+        horaAbertura_Field.setBounds(70,50,40,30);
         add(horaAbertura_Field);
         add(horaAbertura);
         //Costrói o campo para inserir o minuto de abertura
         minutoAbertura_Field = new JTextField();
-        minutoAbertura_Field.setBounds(110,50,40,40);
+        minutoAbertura_Field.setBounds(110,50,40,30);
         add(minutoAbertura_Field);
 
 
@@ -63,12 +63,12 @@ public class FormEstacionamento extends JFrame implements ActionListener {
         horaFechamento.setFont(new Font("Arial", Font.BOLD,16));
         horaFechamento.setBounds(210,50,80,40);
         horaFechamento_Field = new JTextField();
-        horaFechamento_Field.setBounds(290,50,40,40);
+        horaFechamento_Field.setBounds(290,50,40,30);
         add(horaFechamento);
         add(horaFechamento_Field);
         //Costrói o campo para inserir o minuto de Fechamento
         minutoFechamento_Field = new JTextField();
-        minutoFechamento_Field.setBounds(330,50,40,40);
+        minutoFechamento_Field.setBounds(330,50,40,30);
         add(minutoFechamento_Field);
 
         //Costrói o campo para inserir a capacidade do estacionamento
@@ -77,18 +77,23 @@ public class FormEstacionamento extends JFrame implements ActionListener {
         capacidade.setFont(new Font("Arial", Font.BOLD,15));
         capacidade.setBounds(1,100,100,40);
         capacidade_Field = new JTextField();
-        capacidade_Field.setBounds(110,100,40,40);
+        capacidade_Field.setBounds(110,100,40,30);
         add(capacidade_Field);
 
         //Costrói o campo para inserir o valor do contratante
         JLabel retornoCon = new JLabel("Retorno Contratante:");
         add(retornoCon);
         retornoCon.setFont(new Font("Arial", Font.BOLD,14));
-        retornoCon.setBounds(210,100,70,40);
+        retornoCon.setBounds(210,100,70,30);
 
         valorContratante_field = new JTextField();
-        valorContratante_field.setBounds(290,100,40,40);
         add(valorContratante_field);
+        valorContratante_field.setBounds(290,100,40,30);
+
+        JLabel percent = new JLabel("%");
+        add(percent);
+        percent.setFont(new Font("Arial", Font.BOLD,14));
+        percent.setBounds(330,100,70,30);
 
 
 
