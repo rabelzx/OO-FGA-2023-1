@@ -73,21 +73,25 @@ public class FormEstacionamento extends JFrame implements ActionListener {
 
         //Costrói o campo para inserir a capacidade do estacionamento
         JLabel capacidade = new JLabel("Capacidade:");
+        add(capacidade);
         capacidade.setFont(new Font("Arial", Font.BOLD,15));
         capacidade.setBounds(1,100,100,40);
         capacidade_Field = new JTextField();
         capacidade_Field.setBounds(110,100,40,40);
-        add(capacidade);
         add(capacidade_Field);
 
         //Costrói o campo para inserir o valor do contratante
-        JLabel retornoCon = new JLabel("Retorno do Contratante:");
-        retornoCon.setFont(new Font("Arial", Font.BOLD,15));
+        JLabel retornoCon = new JLabel("Retorno Contratante:");
+        add(retornoCon);
+        retornoCon.setFont(new Font("Arial", Font.BOLD,14));
         retornoCon.setBounds(210,100,70,40);
+
         valorContratante_field = new JTextField();
         valorContratante_field.setBounds(290,100,40,40);
-        add(retornoCon);
         add(valorContratante_field);
+
+
+
 
 
     }
