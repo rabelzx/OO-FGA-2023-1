@@ -77,11 +77,11 @@ public class FormEstacionamento extends JFrame implements ActionListener {
         capacidade.setFont(new Font("Arial", Font.BOLD,15));
         capacidade.setBounds(1,100,100,40);
         capacidade_Field = new JTextField();
-        capacidade_Field.setBounds(110,100,40,30);
+        capacidade_Field.setBounds(90,100,40,30);
         add(capacidade_Field);
 
         //Costrói o campo para inserir o valor do contratante
-        JLabel retornoCon = new JLabel("Retorno Contratante:");
+        JLabel retornoCon = new JLabel("Retorno:");
         add(retornoCon);
         retornoCon.setFont(new Font("Arial", Font.BOLD,14));
         retornoCon.setBounds(210,100,70,30);
@@ -90,10 +90,11 @@ public class FormEstacionamento extends JFrame implements ActionListener {
         add(valorContratante_field);
         valorContratante_field.setBounds(290,100,40,30);
 
+
         JLabel percent = new JLabel("%");
         add(percent);
         percent.setFont(new Font("Arial", Font.BOLD,14));
-        percent.setBounds(330,100,70,30);
+        percent.setBounds(330,100,20,30);
 
 
 
