@@ -23,28 +23,17 @@ public class Acesso {
         this.valorTotal = calcPrice(abrir,fechar, valores);
     }
     
+    //calculo apenas para valores de fracao e hora cheia
     public float calcPrice(Horario abrir, Horario fechar, Valores valores) {
         int tempoPermanencia =  Horario.diferencaMinutos(entrada, saida);
-        
-        if(chkMens) 
-        	return valores.getMensalista();
-        else if(chkEvent)
-        	return valores.getEvento();
-        else {
-        	if(entrada.getHora() > fechar.getHora() && saida.getHora() < abrir.getHora())
-        		return valores.getDiurna() * valores.getNoturna(); 
-        	else {        		
-        		if(tempoPermanencia > 0 && tempoPermanencia < 60) {
-        			int valorFracao = tempoPermanencia / 15; 
-        			return valorFracao * valores.getFracao();
-        		} else if(tempoPermanencia >= 60 && tempoPermanencia <= 540) {
-        			int horasCheias = tempoPermanencia / 60; 
-        			int fracaoCheia = (tempoPermanencia - horasCheias * 60) / 15;
-        			return horasCheias * valores.getHora_cheia() + fracaoCheia * valores.getFracao();     			
-        		} else
-        			return valores.getDiurna(); 			
-        	}
-        }
+        	if(tempoPermanencia > 0 && tempoPermanencia < 60) {
+				int valorFracao = tempoPermanencia / 15; 
+				return valorFracao * valores.getFracao();
+			}else {
+				int horasCheias = tempoPermanencia / 60; 
+				int fracaoCheia = (tempoPermanencia - horasCheias * 60) / 15;
+				return horasCheias * valores.getHora_cheia() + fracaoCheia * valores.getFracao();   
+			} 
     }
     
     // --------------------getters e setters----------------------------
