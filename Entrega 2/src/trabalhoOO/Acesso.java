@@ -22,7 +22,11 @@ public class Acesso {
         this.dtAcesso = dtAcesso; 
         this.valorTotal = calcPrice(abrir,fechar, valores);
     }
-    
+
+    public Acesso(String placa, Boolean evento, Boolean mensalista, Horario entrada, Horario saida, Valores valores, Horario abrir, Horario fechar) {
+
+    }
+
     //calculo apenas para valores de fracao e hora cheia
     public float calcPrice(Horario abrir, Horario fechar, Valores valores) {
         int tempoPermanencia =  Horario.diferencaMinutos(entrada, saida);

@@ -26,10 +26,10 @@ public class Main {
                     cadastrarOpcoes(estacionamentos, acessos);
                     break;
                 case 2:
-                    buscarOpcoes();
+                    buscarOpcoes(estacionamentos, acessos);
                     break;
                 case 3:
-                    apagarOpcoes();
+                    apagarOpcoes(estacionamentos, acessos);
                     break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "Saindo do programa...");
@@ -144,31 +144,68 @@ public class Main {
         } while (opcao != 0);
     }
 
-    public static void buscarOpcoes() {
+    public static void buscarOpcoes(ArrayList<Estacionamento> estacionamentos, ArrayList<Acesso> acessos) {
         int opcao;
 
         do {
             opcao = Integer.parseInt(JOptionPane.showInputDialog(null,
                     "BUSCAR\n" +
-                    "1. Buscar acessos por placa\n" +
-                    "2. Buscar estacionamento por nome\n" +
-                    "3. Buscar eventos por nome\n" +
-                    "0. Voltar\n\n" +
-                    "Escolha uma opção:", "Buscar", JOptionPane.PLAIN_MESSAGE));
+                            "1. Buscar acessos por placa\n" +
+                            "2. Buscar estacionamento por nome\n" +
+                            "0. Voltar\n\n" +
+                            "Escolha uma opção:", "Buscar", JOptionPane.PLAIN_MESSAGE));
 
             switch (opcao) {
                 case 1:
-                   
+                    // Buscar acessos por placa
+                    String placa = JOptionPane.showInputDialog(null, "Digite a placa a ser buscada:", "Buscar Acessos por Placa", JOptionPane.PLAIN_MESSAGE);
+                    ArrayList<Acesso> acessosEncontrados = new ArrayList<>();
+
+                    for (Acesso acesso : acessos) {
+                        if (acesso.getPlaca().equalsIgnoreCase(placa)) {
+                            acessosEncontrados.add(acesso);
+                        }
+                    }
+
+                    if (acessosEncontrados.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Nenhum acesso encontrado para a placa informada.");
+                    } else {
+                        StringBuilder mensagemAcessos = new StringBuilder("Acessos encontrados:\n");
+                        for (Acesso acesso : acessosEncontrados) {
+                            mensagemAcessos.append("Placa: ").append(acesso.getPlaca()).append("\n");
+                            // Adicione outros detalhes do acesso que deseja exibir
+                        }
+                        JOptionPane.showMessageDialog(null, mensagemAcessos.toString());
+                    }
                     break;
+
                 case 2:
-                  
+                    // Buscar estacionamento por nome
+                    String nomeEstacionamento = JOptionPane.showInputDialog(null, "Digite o nome do estacionamento a ser buscado:", "Buscar Estacionamento por Nome", JOptionPane.PLAIN_MESSAGE);
+                    ArrayList<Estacionamento> estacionamentosEncontrados = new ArrayList<>();
+
+                    for (Estacionamento estacionamento : estacionamentos) {
+                        if (estacionamento.getNome().equalsIgnoreCase(nomeEstacionamento)) {
+                            estacionamentosEncontrados.add(estacionamento);
+                        }
+                    }
+
+                    if (estacionamentosEncontrados.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Nenhum estacionamento encontrado com o nome informado.");
+                    } else {
+                        StringBuilder mensagemEstacionamentos = new StringBuilder("Estacionamentos encontrados:\n");
+                        for (Estacionamento estacionamento : estacionamentosEncontrados) {
+                            mensagemEstacionamentos.append("Nome: ").append(estacionamento.getNome()).append("\n");
+                            // Adicione outros detalhes do estacionamento que deseja exibir
+                        }
+                        JOptionPane.showMessageDialog(null, mensagemEstacionamentos.toString());
+                    }
                     break;
-                case 3:
-                   
-                    break;
+
                 case 0:
                     JOptionPane.showMessageDialog(null, "Voltando ao menu principal...");
                     break;
+
                 default:
                     JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.");
                     break;
@@ -177,27 +214,68 @@ public class Main {
         } while (opcao != 0);
     }
 
-    public static void apagarOpcoes() {
+    public static void apagarOpcoes(ArrayList<Estacionamento> estacionamentos, ArrayList<Acesso> acessos) {
         int opcao;
 
         do {
             opcao = Integer.parseInt(JOptionPane.showInputDialog(null,
                     "APAGAR\n" +
-                    "1. Apagar acessos\n" +
-                    "2. Apagar estacionamentos\n" +
-                    "0. Voltar\n\n" +
-                    "Escolha uma opção:", "Apagar", JOptionPane.PLAIN_MESSAGE));
+                            "1. Apagar acessos\n" +
+                            "2. Apagar estacionamentos\n" +
+                            "0. Voltar\n\n" +
+                            "Escolha uma opção:", "Apagar", JOptionPane.PLAIN_MESSAGE));
 
             switch (opcao) {
                 case 1:
-                    
+                    // Apagar acessos
+                    if (acessos.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Não há acessos cadastrados para serem apagados.");
+                    } else {
+                        StringBuilder mensagemAcessos = new StringBuilder("Acessos cadastrados:\n");
+                        for (int i = 0; i < acessos.size(); i++) {
+                            mensagemAcessos.append(i).append(". ").append(acessos.get(i).getPlaca()).append("\n");
+                        }
+                        int escolhaAcessos = Integer.parseInt(JOptionPane.showInputDialog(null, mensagemAcessos.toString(), "Apagar Acesso", JOptionPane.PLAIN_MESSAGE));
+
+                        if (escolhaAcessos >= 0 && escolhaAcessos < acessos.size()) {
+                            acessos.remove(escolhaAcessos);
+                            JOptionPane.showMessageDialog(null, "Acesso apagado com sucesso.");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.");
+                        }
+                    }
                     break;
+
                 case 2:
-                    
+                    // Apagar estacionamentos
+                    if (estacionamentos.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Não há estacionamentos cadastrados para serem apagados.");
+                    } else {
+                        StringBuilder mensagemEstacionamentos = new StringBuilder("Estacionamentos cadastrados:\n");
+                        for (int i = 0; i < estacionamentos.size(); i++) {
+                            mensagemEstacionamentos.append(i).append(". ").append(estacionamentos.get(i).getNome()).append("\n");
+                        }
+                        int escolhaEstacionamentos = Integer.parseInt(JOptionPane.showInputDialog(null, mensagemEstacionamentos.toString(), "Apagar Estacionamento", JOptionPane.PLAIN_MESSAGE));
+
+                        if (escolhaEstacionamentos >= 0 && escolhaEstacionamentos < estacionamentos.size()) {
+                            Estacionamento estacionamento = estacionamentos.get(escolhaEstacionamentos);
+                            for (Acesso acesso : acessos) {
+                                if (acesso.getPlaca().equals(estacionamento.getNome())) {
+                                    acessos.remove(acesso);
+                                }
+                            }
+                            estacionamentos.remove(escolhaEstacionamentos);
+                            JOptionPane.showMessageDialog(null, "Estacionamento apagado com sucesso.");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.");
+                        }
+                    }
                     break;
+
                 case 0:
                     JOptionPane.showMessageDialog(null, "Voltando ao menu principal...");
                     break;
+
                 default:
                     JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.");
                     break;
