@@ -90,7 +90,7 @@ public class Main {
                     break;
                 case 2:
                 	String nomesEstacionamentos = new String();  
-                    for(int i = 0; i < estacionamentos.size(); i++) 
+                    for(int i = 0; i < estacionamentos.size(); i++)
                     	nomesEstacionamentos += (i+" - "+estacionamentos.get(i).getNome()+"\n"); 
                     int escolhaEstacionamento = Integer.parseInt(JOptionPane.showInputDialog(null, "Qual o estacionamento do acesso?\n" + nomesEstacionamentos,  JOptionPane.PLAIN_MESSAGE));
                  
@@ -102,10 +102,7 @@ public class Main {
                     
                     int diaAcesso = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
                     int mesAcesso =  Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
-                    int anoAcesso = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE)); 
-                    
-                    int eventoResposta = JOptionPane.showOptionDialog(null, "O acesso é do tipo evento?", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sim", "Não"}, null);
-                    boolean eventoChk = (eventoResposta == JOptionPane.YES_OPTION);
+                    int anoAcesso = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
                    
                     int mensalistaResposta = JOptionPane.showOptionDialog(null, "O acesso é do tipo mensalista", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sim", "Não"}, null);
                     boolean mensChk = (mensalistaResposta == JOptionPane.YES_OPTION);

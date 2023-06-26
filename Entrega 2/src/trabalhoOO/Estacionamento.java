@@ -12,9 +12,10 @@ public class Estacionamento {
     private Horario abrir;
     private Horario fechar;
     ArrayList<Acesso> acessos = new ArrayList<>();
+    ArrayList<Evento> eventos = new ArrayList<>();
     private Valores valores;
 
-    private int quantidade_Acessos=0;
+    private int quantidade_Acessos=0,quantidade_Eventos=0;
 
     public Estacionamento() {} //Padrão
 
@@ -31,7 +32,9 @@ public class Estacionamento {
     public void cadastrarAcesso(String placa, Boolean mensalista,Data data, Horario entrada, Horario saida) {
         if (mensalista) {
             acessos.set(quantidade_Acessos,
-                    new AcessoMensalista(placa, entrada, saida, data, valores, abrir, fechar));
+                    new Acesso(placa, entrada, saida, data, valores, abrir, fechar));
+        } else if () {
+
         }
 
         quantidade_Acessos++;
@@ -43,12 +46,17 @@ public class Estacionamento {
         valores = new Valores(fracao,diurna,descontoNoturno,mensalidade,evento,retornoCon,descontoHora);
     }
 
+    public void cadastrarEvento(String nome, Data dataInicio, Data dataFim, Horario horaInicio, Horario horaFim){
+        //eventos.set(quantidade_Eventos, nome,dataInicio,dataFim,horaInicio,horaFim);
+    }
+
+
     //Calcula o retorno do contratante
     public float calcRetorno() {
         int retorno = 0;
-            for (int i = 0; i < acessos.size(); i++){
+           // for (int i = 0; i < acessos.size(); i++){
 
-            }
+            //}
         
         return retorno * valCon;}
 
