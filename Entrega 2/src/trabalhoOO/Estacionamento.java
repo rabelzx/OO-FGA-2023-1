@@ -15,7 +15,6 @@ public class Estacionamento {
     ArrayList<Evento> eventos = new ArrayList<>();
     private Valores valores;
 
-    private int quantidade_Acessos=0,quantidade_Eventos=0;
 
     public Estacionamento() {} //Padrão
 
@@ -55,18 +54,17 @@ public class Estacionamento {
 
     public void cadastrarAcesso(String placa, Boolean mensalista,Data dtEntrada, Data dtSaida, Horario entrada, Horario saida) {
         if (mensalista) {
-            acessos.add(quantidade_Acessos,
-                    new AcessoMensalista(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
+            acessos.add(new AcessoMensalista(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
         } else if (acessoEvento(eventos, dtEntrada)) {
-            acessos.add(quantidade_Acessos, new AcessoEvento(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
+            acessos.add(new AcessoEvento(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
         } else if (Horario.diferencaMinutos(entrada, saida) > 540 || ((entrada.getHora() >= fechar.getHora() && entrada.getMinuto() >= fechar.getMinuto())
                     && (saida.getHora() <= abrir.getHora() && saida.getMinuto() <= abrir.getMinuto()))){
-            acessos.add(quantidade_Acessos, new AcessoDiaria(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
+            acessos.add(new AcessoDiaria(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
         } else{
-            acessos.add(quantidade_Acessos, new Acesso(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
+            acessos.add(new Acesso(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
         }
 
-        quantidade_Acessos++;
+
 
     }
 
@@ -76,7 +74,7 @@ public class Estacionamento {
     }
 
     public void cadastrarEvento(String nome, Data dataInicio, Data dataFim, Horario horaInicio, Horario horaFim){
-        //eventos.set(quantidade_Eventos, nome,dataInicio,dataFim,horaInicio,horaFim);
+        eventos.add(new Evento(nome,dataInicio,dataFim,horaInicio,horaFim));
     }
 
 
