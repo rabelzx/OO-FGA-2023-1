@@ -57,4 +57,6 @@ public class Evento {
 	public void setHrFim(Horario hrFim) {
 		this.hrFim = hrFim;
 	}
+        
+        
 }

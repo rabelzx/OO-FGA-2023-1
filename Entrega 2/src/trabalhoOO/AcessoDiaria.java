@@ -12,7 +12,8 @@ public class AcessoDiaria extends Acesso {
     public float calcPrice(Horario abrir, Horario fechar, Valores valores) {
     	if(getEntrada().getHora() > fechar.getHora() && getSaida().getHora() < abrir.getHora())
     		return valores.getDiurna() * valores.getNoturna(); 
-    	else  	
+        
+        else
     		return valores.getDiurna(); 
    
     }

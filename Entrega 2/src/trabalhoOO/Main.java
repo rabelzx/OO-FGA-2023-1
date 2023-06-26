@@ -120,7 +120,7 @@ public class Main {
 
                     estacionamentos.get(escolhaEstacionamento).cadastrarAcesso(placa, mensChk, dtEntrada, dtSaida, entrada, saida);
                     
-                	JOptionPane.showMessageDialog(null, "Estacionamento cadastrado com sucesso!");
+                	JOptionPane.showMessageDialog(null, "Acesso cadastrado com sucesso!");
                     break;
                 case 3: 
                 	String evento = JOptionPane.showInputDialog(null, "Insira o nome do evento:", "Cadastar Evento", JOptionPane.PLAIN_MESSAGE);
@@ -153,9 +153,13 @@ public class Main {
                     String placa = JOptionPane.showInputDialog(null, "Digite a placa a ser buscada:", "Buscar Acessos por Placa", JOptionPane.PLAIN_MESSAGE);
                     ArrayList<Acesso> acessosEncontrados = new ArrayList<>();
 
-                    for (Acesso acesso : acessos) {
-                        if (acesso.getPlaca().equalsIgnoreCase(placa)) {
-                            acessosEncontrados.add(acesso);
+                    
+                    
+                    for (Estacionamento estac : estacionamentos){
+                        for (Acesso acesso : estac.acessos) {
+                            if (acesso.getPlaca() == placa) {
+                                acessosEncontrados.add(acesso);
+                              }
                         }
                     }
 

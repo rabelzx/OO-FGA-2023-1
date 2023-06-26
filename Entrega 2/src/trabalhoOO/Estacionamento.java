@@ -28,13 +28,42 @@ public class Estacionamento {
         this.nome = nome;
 
     }
+    
+    public boolean acessoEvento(ArrayList<Evento> eventos, Data dtAcesso){
+        
+        
+        for (Evento event : eventos){
+            Data inicioEvento = event.getDtInicio();
+            Data fimEvento = event.getDtFim();
+            if (dtAcesso.getMes() == inicioEvento.getMes() || dtAcesso.getMes() == fimEvento.getMes()){
+                if(dtAcesso.getAno() == inicioEvento.getAno() || dtAcesso.getAno() == fimEvento.getAno()){
+                    if (inicioEvento.getMes() != fimEvento.getMes()){
+                        if(dtAcesso.getDia() >= inicioEvento.getDia() || dtAcesso.getDia() <= fimEvento.getDia()){
+                            return true;
+                        }
+                    else if(inicioEvento.getMes() == fimEvento.getMes()){
+                        if(dtAcesso.getDia() >= inicioEvento.getDia() && dtAcesso.getDia() <= fimEvento.getDia()){
+                            return true;
+                        }
+                    }
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
-    public void cadastrarAcesso(String placa, Boolean mensalista,Data data, Horario entrada, Horario saida) {
+    public void cadastrarAcesso(String placa, Boolean mensalista,Data dtEntrada, Data dtSaida, Horario entrada, Horario saida) {
         if (mensalista) {
-            acessos.set(quantidade_Acessos,
-                    new Acesso(placa, entrada, saida, data, valores, abrir, fechar));
-        } else if () {
-
+            acessos.add(quantidade_Acessos,
+                    new AcessoMensalista(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
+        } else if (acessoEvento(eventos, dtEntrada)) {
+            acessos.add(quantidade_Acessos, new AcessoEvento(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
+        } else if (Horario.diferencaMinutos(entrada, saida) > 540 || ((entrada.getHora() >= fechar.getHora() && entrada.getMinuto() >= fechar.getMinuto())
+                    && (saida.getHora() <= abrir.getHora() && saida.getMinuto() <= abrir.getMinuto()))){
+            acessos.add(quantidade_Acessos, new AcessoDiaria(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
+        } else{
+            acessos.add(quantidade_Acessos, new Acesso(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
         }
 
         quantidade_Acessos++;
