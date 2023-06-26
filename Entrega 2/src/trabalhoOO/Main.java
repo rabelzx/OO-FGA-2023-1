@@ -24,9 +24,11 @@ public class Main {
             switch (opcao) {
                 case 1:
                     cadastrarOpcoes(estacionamentos, acessos);
+                    
                     break;
                 case 2:
                     buscarOpcoes(estacionamentos, acessos);
+                    
                     break;
                 case 3:
                     apagarOpcoes(estacionamentos, acessos);
@@ -43,7 +45,6 @@ public class Main {
     }
 
     public static void cadastrarOpcoes(ArrayList<Estacionamento> estacionamentos, ArrayList<Acesso> acessos ) {
-
 
         int opcao;
 
@@ -151,14 +152,17 @@ public class Main {
                 case 1:
                     // Buscar acessos por placa
                     String placa = JOptionPane.showInputDialog(null, "Digite a placa a ser buscada:", "Buscar Acessos por Placa", JOptionPane.PLAIN_MESSAGE);
+                    
                     ArrayList<Acesso> acessosEncontrados = new ArrayList<>();
-
+                    ArrayList<Estacionamento> estacAcesso = new ArrayList<>();
+                    
                     
                     
                     for (Estacionamento estac : estacionamentos){
                         for (Acesso acesso : estac.acessos) {
-                            if (acesso.getPlaca() == placa) {
+                            if (acesso.getPlaca().equals(placa)) {
                                 acessosEncontrados.add(acesso);
+                                estacAcesso.add(estac);
                               }
                         }
                     }
@@ -168,7 +172,8 @@ public class Main {
                     } else {
                         StringBuilder mensagemAcessos = new StringBuilder("Acessos encontrados:\n");
                         for (Acesso acesso : acessosEncontrados) {
-                            mensagemAcessos.append("Placa: ").append(acesso.getPlaca()).append("\n");
+                            mensagemAcessos.append("Placa: ").append(acesso.getPlaca()).append("\n"+estacAcesso.get(acessosEncontrados.indexOf(acesso)).getNome());
+                            
                             // Adicione outros detalhes do acesso que deseja exibir
                         }
                         JOptionPane.showMessageDialog(null, mensagemAcessos.toString());
