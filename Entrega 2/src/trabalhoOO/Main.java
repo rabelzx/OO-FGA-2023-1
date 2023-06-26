@@ -100,9 +100,13 @@ public class Main {
                     int horaSaida = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de saída do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
                     int minutosSaida = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de saída do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
                     
-                    int diaAcesso = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
-                    int mesAcesso =  Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
-                    int anoAcesso = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    int diaEntrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do início do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    int mesEntrada =  Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do início do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    int anoEntrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do início do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    
+                    int diaSaida = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do fim do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    int mesSaida =  Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do fim do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    int anoSaida = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do fim do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
                    
                     int mensalistaResposta = JOptionPane.showOptionDialog(null, "O acesso é do tipo mensalista", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sim", "Não"}, null);
                     boolean mensChk = (mensalistaResposta == JOptionPane.YES_OPTION);
@@ -111,9 +115,10 @@ public class Main {
                     Horario entrada = new Horario(horaEntrada, minutosEntrada); 
                     Horario saida = new Horario(horaSaida, minutosSaida); 
                     
-                    Data dtAcesso = new Data(diaAcesso, mesAcesso, anoAcesso); 
+                    Data dtEntrada = new Data(diaEntrada, mesEntrada, anoEntrada); 
+                    Data dtSaida = new Data(diaSaida, mesSaida, anoSaida); 
 
-                    estacionamentos.get(escolhaEstacionamento).cadastrarAcesso(placa, mensChk, dtAcesso, entrada, saida);
+                    estacionamentos.get(escolhaEstacionamento).cadastrarAcesso(placa, mensChk, dtEntrada, dtSaida, entrada, saida);
                     
                 	JOptionPane.showMessageDialog(null, "Estacionamento cadastrado com sucesso!");
                     break;

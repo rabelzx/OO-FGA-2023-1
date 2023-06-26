@@ -7,17 +7,19 @@ public class Acesso {
     private float valorTotal;
     private Horario entrada;
     private Horario saida;
-    private Data dtAcesso;
+    private Data dtEntrada;
+    private Data dtSaida; 
 
     //construtor vazio
     public Acesso() {}
 
     //construtor
-    public Acesso(String placa, Horario entrada, Horario saida, Data dtAcesso, Valores valores, Horario abrir, Horario fechar) {
+    public Acesso(String placa, Horario entrada, Horario saida, Data dtEntrada, Data dtSaida, Valores valores, Horario abrir, Horario fechar) {
         this.placa = placa;
         this.entrada = entrada;
         this.saida = saida;
-        this.dtAcesso = dtAcesso; 
+        this.dtEntrada = dtEntrada;
+        this.dtSaida = dtSaida; 
         this.valorTotal = calcPrice(abrir,fechar, valores);
     }
 
@@ -93,7 +95,11 @@ public class Acesso {
         this.saida = saida;
     }
 
-    public Data getDtAcesso() {
-        return dtAcesso;
+    public Data getDtEntrada() {
+        return dtEntrada;
+    }
+    
+    public Data getDtSaida() {
+    	return dtSaida; 
     }
 }
