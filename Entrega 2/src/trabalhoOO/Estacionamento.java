@@ -8,7 +8,6 @@ public class Estacionamento {
     private String nome;
     private int capacidade;
     private float valCon;
-
     private float retornoCon = calcRetorno();
     private Horario abrir;
     private Horario fechar;
@@ -30,9 +29,9 @@ public class Estacionamento {
     }
 
     public void cadastrarAcesso(String placa, Boolean mensalista,Data data, Horario entrada, Horario saida) {
-        if (mensalista){
+        if (mensalista) {
             acessos.set(quantidade_Acessos,
-            new AcessoMensalista(placa, mensalista, entrada, saida, data, valores, abrir, fechar));
+                    new AcessoMensalista(placa, entrada, saida, data, valores, abrir, fechar));
         }
 
         quantidade_Acessos++;
@@ -47,8 +46,9 @@ public class Estacionamento {
     //Calcula o retorno do contratante
     public float calcRetorno() {
         int retorno = 0;
-        
-        
+            for (int i = 0; i < acessos.size(); i++){
+
+            }
         
         return retorno * valCon;}
 

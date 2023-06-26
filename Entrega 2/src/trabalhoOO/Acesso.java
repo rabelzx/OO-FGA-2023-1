@@ -13,16 +13,15 @@ public class Acesso {
     public Acesso() {}
 
     //construtor
-    public Acesso(String placa, boolean chkMens, Horario entrada, Horario saida, Data dtAcesso, Valores valores, Horario abrir, Horario fechar) {
+    public Acesso(String placa, Horario entrada, Horario saida, Data dtAcesso, Valores valores, Horario abrir, Horario fechar) {
         this.placa = placa;
-        this.chkMens = chkMens;
         this.entrada = entrada;
         this.saida = saida;
         this.dtAcesso = dtAcesso; 
         this.valorTotal = calcPrice(abrir,fechar, valores);
     }
 
-    public Acesso(String placa,  Boolean mensalista, Horario entrada, Horario saida, Valores valores, Horario abrir, Horario fechar) {
+    public Acesso(String placa, Horario entrada, Horario saida, Valores valores, Horario abrir, Horario fechar) {
 
     }
 
