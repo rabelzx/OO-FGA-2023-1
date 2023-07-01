@@ -97,10 +97,32 @@ public class Estacionamento {
     //Calcula o retorno do contratante
     public float calcRetorno() {
         int retorno = 0;
-           // for (int i = 0; i < acessos.size(); i++){
+        ArrayList<String> placas = new ArrayList<>();
+           for (int i = 0; i < acessos.size(); i++){
+                if (acessos.get(i).getClass() == AcessoMensalista.class){
+                    if (placas.equals(acessos.get(i).getPlaca()));
+                    else{placas.add(acessos.get(i).getPlaca());}
+                }
+                else{retorno += acessos.get(i).calcPrice(abrir,fechar,valores);}
+           }
+        //Contabiliza os mensalistas
+            for (int j = 0; j < placas.size(); j++){//Vai fazer o codigo abaixo para cada placa mensalista
+                ArrayList<Data> verificadas = new ArrayList<>();//Datas que já foram verificadas
 
-            //}
-        
+                for (int i = 0; i < acessos.size(); i++){ //Passa pelo vetor de acesso
+                    if (placas.get(j) == acessos.get(i).getPlaca()){//Verifica se o acesso possui a placa mensalista
+
+                        for (int k = 0; k < verificadas.size(); k++)//Varre o vetor das Verificadas
+                            if (verificadas.get(k).compararMesAno(acessos.get(i).getDtEntrada())){}//se o Mês já recebeu acesso
+                            else{//Se o mês não recebeu acesso
+                                retorno += acessos.get(i).calcPrice(abrir,fechar,valores);//Soma o valor ao montante
+                                verificadas.add(acessos.get(i).getDtEntrada());// e adiciona a data deste acesso as datas verificadas
+                            }
+
+                    }
+                }
+            }
+
         return retorno * valCon;}
 
 

@@ -27,6 +27,11 @@ public class Data {
         }
     }
 
+    public Boolean compararMesAno(Data data){
+        if (data.getMes() == this.mes && data.getAno() == this.ano){
+            return true;
+        }
+    return false;}
     //-----------setters and getters------------
     public int getDia() {
         return dia;

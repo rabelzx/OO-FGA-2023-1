@@ -3,14 +3,11 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 
 public class Main {
-	
-	
-    public static void main(String[] args) {
-    	
-    	ArrayList<Estacionamento> estacionamentos = new ArrayList<>( );
 
-    	
-    	
+
+    public static void main(String[] args) {
+
+    	ArrayList<Estacionamento> estacionamentos = new ArrayList<>( );
         int opcao;
 
         do {
@@ -124,10 +121,10 @@ public class Main {
                     Data dtSaida = new Data(diaSaida, mesSaida, anoSaida); 
 
                     estacionamentos.get(i).cadastrarAcesso(placa, mensChk, dtEntrada, dtSaida, entrada, saida);
-                    
+
                 	JOptionPane.showMessageDialog(null, "Acesso cadastrado com sucesso!");
                     break;
-                case 3: 
+                case 3:
                 	String evento = JOptionPane.showInputDialog(null, "Insira o nome do evento:", "Cadastar Evento", JOptionPane.PLAIN_MESSAGE);
                 	break;
                 case 0:
