@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
     	
     	ArrayList<Estacionamento> estacionamentos = new ArrayList<>( );
-    	ArrayList<Acesso> acessos = new ArrayList<>( );
+
     	
     	
         int opcao;
@@ -23,15 +23,22 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    cadastrarOpcoes(estacionamentos, acessos);
+                    cadastrarOpcoes(estacionamentos);
                     
                     break;
                 case 2:
-                    buscarOpcoes(estacionamentos, acessos);
+                    if (estacionamentos.size() > 0)
+                        buscarOpcoes(estacionamentos);
+                    else
+                        JOptionPane.showMessageDialog(null, "Nenhum estacionamento cadastrado");
+
                     
                     break;
                 case 3:
-                    apagarOpcoes(estacionamentos, acessos);
+                    if (estacionamentos.size() > 0)
+                        apagarOpcoes(estacionamentos);
+                    else
+                        JOptionPane.showMessageDialog(null, "Nenhum estacionamento cadastrado");
                     break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "Saindo do programa...");
@@ -44,7 +51,7 @@ public class Main {
         } while (opcao != 0);
     }
 
-    public static void cadastrarOpcoes(ArrayList<Estacionamento> estacionamentos, ArrayList<Acesso> acessos ) {
+    public static void cadastrarOpcoes(ArrayList<Estacionamento> estacionamentos) {
 
         int opcao;
 
@@ -90,11 +97,8 @@ public class Main {
             	    JOptionPane.showMessageDialog(null, "Estacionamento cadastrado com sucesso!");
                     break;
                 case 2:
-                	String nomesEstacionamentos = new String();  
-                    for(int i = 0; i < estacionamentos.size(); i++)
-                    	nomesEstacionamentos += (i+" - "+estacionamentos.get(i).getNome()+"\n"); 
-                    int escolhaEstacionamento = Integer.parseInt(JOptionPane.showInputDialog(null, "Qual o estacionamento do acesso?\n" + nomesEstacionamentos,  JOptionPane.PLAIN_MESSAGE));
-                 
+                    int i = escolhaEstacionamento(estacionamentos);
+
                 	String placa = JOptionPane.showInputDialog(null, "Insira a placa do veículo:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE);
                 	int horaEntrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de início do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
                     int minutosEntrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de início do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
@@ -119,7 +123,7 @@ public class Main {
                     Data dtEntrada = new Data(diaEntrada, mesEntrada, anoEntrada); 
                     Data dtSaida = new Data(diaSaida, mesSaida, anoSaida); 
 
-                    estacionamentos.get(escolhaEstacionamento).cadastrarAcesso(placa, mensChk, dtEntrada, dtSaida, entrada, saida);
+                    estacionamentos.get(i).cadastrarAcesso(placa, mensChk, dtEntrada, dtSaida, entrada, saida);
                     
                 	JOptionPane.showMessageDialog(null, "Acesso cadastrado com sucesso!");
                     break;
@@ -137,7 +141,7 @@ public class Main {
         } while (opcao != 0);
     }
 
-    public static void buscarOpcoes(ArrayList<Estacionamento> estacionamentos, ArrayList<Acesso> acessos) {
+    public static void buscarOpcoes(ArrayList<Estacionamento> estacionamentos) {
         int opcao;
 
         do {
@@ -215,7 +219,7 @@ public class Main {
         } while (opcao != 0);
     }
 
-    public static void apagarOpcoes(ArrayList<Estacionamento> estacionamentos, ArrayList<Acesso> acessos) {
+    public static void apagarOpcoes(ArrayList<Estacionamento> estacionamentos) {
         int opcao;
 
         do {
@@ -228,23 +232,8 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    // Apagar acessos
-                    if (acessos.isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "Não há acessos cadastrados para serem apagados.");
-                    } else {
-                        StringBuilder mensagemAcessos = new StringBuilder("Acessos cadastrados:\n");
-                        for (int i = 0; i < acessos.size(); i++) {
-                            mensagemAcessos.append(i).append(". ").append(acessos.get(i).getPlaca()).append("\n");
-                        }
-                        int escolhaAcessos = Integer.parseInt(JOptionPane.showInputDialog(null, mensagemAcessos.toString(), "Apagar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    estacionamentos.get(escolhaEstacionamento(estacionamentos)).apagarAcesso();
 
-                        if (escolhaAcessos >= 0 && escolhaAcessos < acessos.size()) {
-                            acessos.remove(escolhaAcessos);
-                            JOptionPane.showMessageDialog(null, "Acesso apagado com sucesso.");
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.");
-                        }
-                    }
                     break;
 
                 case 2:
@@ -252,17 +241,15 @@ public class Main {
                     if (estacionamentos.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Não há estacionamentos cadastrados para serem apagados.");
                     } else {
-                        StringBuilder mensagemEstacionamentos = new StringBuilder("Estacionamentos cadastrados:\n");
-                        for (int i = 0; i < estacionamentos.size(); i++) {
-                            mensagemEstacionamentos.append(i).append(". ").append(estacionamentos.get(i).getNome()).append("\n");
-                        }
-                        int escolhaEstacionamentos = Integer.parseInt(JOptionPane.showInputDialog(null, mensagemEstacionamentos.toString(), "Apagar Estacionamento", JOptionPane.PLAIN_MESSAGE));
 
+                        int escolhaEstacionamentos = escolhaEstacionamento(estacionamentos);
                         if (escolhaEstacionamentos >= 0 && escolhaEstacionamentos < estacionamentos.size()) {
                             Estacionamento estacionamento = estacionamentos.get(escolhaEstacionamentos);
-                            for (Acesso acesso : acessos) {
-                                if (acesso.getPlaca().equals(estacionamento.getNome())) {
-                                    acessos.remove(acesso);
+                            for (Estacionamento estac : estacionamentos) {
+                                for (Acesso acesso : estac.acessos) {
+                                    if (acesso.getPlaca().equals(estacionamento.getNome()))
+                                        estac.acessos.remove(acesso);
+
                                 }
                             }
                             estacionamentos.remove(escolhaEstacionamentos);
@@ -284,6 +271,17 @@ public class Main {
 
         } while (opcao != 0);
     }
+
+    //Função para fazer a escolha dos estacionamentos;
+    public static int escolhaEstacionamento(ArrayList<Estacionamento> estacionamentos) {
+        String nomesEstacionamentos = new String();
+
+        for (int i = 0; i < estacionamentos.size(); i++){
+            nomesEstacionamentos += (i + " - " + estacionamentos.get(i).getNome() + "\n");
+        }
+        int num = Integer.parseInt(JOptionPane.showInputDialog(null, "Estacionamentos cadastrados:\n" + nomesEstacionamentos, JOptionPane.PLAIN_MESSAGE));
+
+    return num;}
 
 }
 

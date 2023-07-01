@@ -51,7 +51,6 @@ public class Estacionamento {
         }
         return false;
     }
-
     public void cadastrarAcesso(String placa, Boolean mensalista,Data dtEntrada, Data dtSaida, Horario entrada, Horario saida) {
         if (mensalista) {
             acessos.add(new AcessoMensalista(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
@@ -67,7 +66,24 @@ public class Estacionamento {
 
 
     }
+    public void apagarAcesso(){
+        if (this.acessos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Não há acessos cadastrados para serem apagados.");
+        } else {
+            StringBuilder mensagemAcessos = new StringBuilder("Acessos cadastrados:\n");
+            for (int i = 0; i < this.acessos.size(); i++) {
+                mensagemAcessos.append(i).append(". ").append(this.acessos.get(i).getPlaca()).append("\n");
+            }
+            int escolhaAcessos = Integer.parseInt(JOptionPane.showInputDialog(null, mensagemAcessos.toString(), "Apagar Acesso", JOptionPane.PLAIN_MESSAGE));
 
+            if (escolhaAcessos >= 0 && escolhaAcessos < this.acessos.size()) {
+                this.acessos.remove(escolhaAcessos);
+                JOptionPane.showMessageDialog(null, "Acesso apagado com sucesso.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.");
+            }
+        }
+    }
     public void cadastrarValores(float fracao, int desNoturno,int desHora, float diurna, float mensalidade, float evento){
         float descontoHora = desHora/100, descontoNoturno = desNoturno/100;
         valores = new Valores(fracao,diurna,descontoNoturno,mensalidade,evento,retornoCon,descontoHora);
