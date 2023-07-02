@@ -39,7 +39,17 @@ public class Acesso {
 				return horasCheias * valores.getHora_cheia() + fracaoCheia * valores.getFracao();   
 			} 
     }
-    
+
+    public static int checkInOut(Data entrada, Data saida){
+        int diferenca = 0;
+        if (entrada.compararMesAno(saida)){}
+        else if (entrada.getAno() < saida.getAno()){
+            diferenca = (saida.getMes()+12)*(saida.getAno()-entrada.getAno()) - entrada.getMes();
+        }else {
+            diferenca = saida.getMes() - entrada.getMes();
+        }
+        return diferenca;
+    }
     // --------------------getters e setters----------------------------
     
     //placa

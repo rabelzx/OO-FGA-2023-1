@@ -98,33 +98,65 @@ public class Estacionamento {
     public float calcRetorno() {
         int retorno = 0;
         ArrayList<String> placas = new ArrayList<>();
-           for (int i = 0; i < acessos.size(); i++){
-                if (acessos.get(i).getClass() == AcessoMensalista.class){
-                    if (placas.equals(acessos.get(i).getPlaca()));
-                    else{placas.add(acessos.get(i).getPlaca());}
+        for (int i = 0; i < acessos.size(); i++) {
+            if (acessos.get(i).getClass() == AcessoMensalista.class) {
+                if (placas.equals(acessos.get(i).getPlaca())) ;
+                else {
+                    placas.add(acessos.get(i).getPlaca());
                 }
-                else{retorno += acessos.get(i).calcPrice(abrir,fechar,valores);}
-           }
+            } else {
+                retorno += acessos.get(i).calcPrice(abrir, fechar, valores);
+            }
+        }
         //Contabiliza os mensalistas
-            for (int j = 0; j < placas.size(); j++){//Vai fazer o codigo abaixo para cada placa mensalista
-                ArrayList<Data> verificadas = new ArrayList<>();//Datas que já foram verificadas
+        for (int j = 0; j < placas.size(); j++) {//Vai fazer o codigo abaixo para cada placa mensalista
+            ArrayList<Data> verificadas = new ArrayList<>();//Datas que já foram verificadas
 
-                for (int i = 0; i < acessos.size(); i++){ //Passa pelo vetor de acesso
-                    if (placas.get(j) == acessos.get(i).getPlaca()){//Verifica se o acesso possui a placa mensalista
+            for (int i = 0; i < acessos.size(); i++) { //Passa pelo vetor de acesso
+                if (placas.get(j) == acessos.get(i).getPlaca()) {//Verifica se o acesso possui a placa mensalista
 
-                        for (int k = 0; k < verificadas.size(); k++)//Varre o vetor das Verificadas
-                            if (verificadas.get(k).compararMesAno(acessos.get(i).getDtEntrada())){}//se o Mês já recebeu acesso
-                            else{//Se o mês não recebeu acesso
-                                retorno += acessos.get(i).calcPrice(abrir,fechar,valores);//Soma o valor ao montante
-                                verificadas.add(acessos.get(i).getDtEntrada());// e adiciona a data deste acesso as datas verificadas
+                //===========================================================================================================
+                    //Preenche os intervalos caso o acesso tenha sido feito por um tempo maior que 1 mes.
+                    //O acesso mensalista por si só já calcula o preço certo caso ele tenha passado mais de um mês
+                    //estacionado. No entanto, a Array de verificadas não sabe disso, portanto essa parte do código é
+                    //para não serem contabilizados o mesmo mês para uma mesma placa mais de uma vez
+
+                    for (int k = 0; k < verificadas.size(); k++) {//Varre o vetor das Verificadas
+                        int anosPassados=0,mes = acessos.get(i).getDtEntrada().getMes();
+
+                        do {
+                            mes++;
+                            if (acessos.get(i).getDtEntrada().compararMesAno(acessos.get(i).getDtSaida())){
+                                break;//Quebra o Do While caso a entrada e saida tenha sido feito no mesmo mês
                             }
+                            else if (mes > 12) {      //Em caso de virada de ano
+                                anosPassados++;     //Aumenta a quantidade de anos que se passaram
+                                mes -= 12;            //Reseta o contador do Mês
+                                verificadas.add(new Data(1, mes, acessos.get(i).getDtEntrada().getAno()+anosPassados));
+                            }
+                            else {
+                                verificadas.add(new Data(1, mes, acessos.get(i).getDtEntrada().getAno()+anosPassados));
+                            }
+                        }while (mes != acessos.get(i).getDtSaida().getMes());
+                    }
+                //===========================================================================================================
+
+                    for (int k = 0; k < verificadas.size(); k++) {                           //Varre o vetor das Verificadas
+                        if (verificadas.get(k).compararMesAno(acessos.get(i).getDtEntrada()))//Compara mês e ano das datas já verificadas com a atual
+                        {}                                                                   //se o Mês já recebeu acesso nada acontece
+
+                        else {                                                           //Se o mês não recebeu acesso
+                            retorno += acessos.get(i).calcPrice(abrir, fechar, valores); //Soma o valor ao montante
+                            verificadas.add(acessos.get(i).getDtEntrada());              //E adiciona a data deste acesso às datas verificadas
+                        }
 
                     }
+
                 }
             }
 
+        }
         return retorno * valCon;}
-
 
     //====================================================================================
     //Sets e Gets
