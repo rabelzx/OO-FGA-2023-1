@@ -10,7 +10,7 @@ public class Estacionamento {
     private float valCon;
     private Horario abrir;
     private Horario fechar;
-    ArrayList<Acesso> acessos = new ArrayList<>(capacidade);
+    ArrayList<Acesso> acessos = new ArrayList<>();
     ArrayList<Evento> eventos = new ArrayList<>();
     private Valores valores;
 
@@ -95,6 +95,7 @@ public class Estacionamento {
 
     //Calcula o retorno do contratante
     public float calcRetorno() {
+        System.out.println(valCon);
         int retorno = 0;
         ArrayList<String> placas = new ArrayList<>();
         for (int i = 0; i < acessos.size(); i++) {
@@ -107,6 +108,7 @@ public class Estacionamento {
                 retorno += acessos.get(i).calcPrice(abrir, fechar, valores);
             }
         }
+
         //Contabiliza os mensalistas
         for (int j = 0; j < placas.size(); j++) {//Vai fazer o codigo abaixo para cada placa mensalista
             ArrayList<Data> verificadas = new ArrayList<>();//Datas que já foram verificadas
@@ -155,7 +157,7 @@ public class Estacionamento {
             }
 
         }
-        return retorno * valCon;}
+        return retorno;}
 
     //====================================================================================
     //Sets e Gets
