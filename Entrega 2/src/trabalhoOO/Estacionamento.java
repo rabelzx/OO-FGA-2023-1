@@ -93,7 +93,7 @@ public class Estacionamento {
     }
 
 
-    //Calcula o retorno do contratante
+    //Calcula o retorno d contratante
     public float calcRetorno() {
         System.out.println(valCon);
         int retorno = 0;
