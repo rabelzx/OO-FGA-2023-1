@@ -8,10 +8,9 @@ public class Estacionamento {
     private String nome;
     private int capacidade;
     private float valCon;
-    private float retornoCon;
     private Horario abrir;
     private Horario fechar;
-    ArrayList<Acesso> acessos = new ArrayList<>();
+    ArrayList<Acesso> acessos = new ArrayList<>(capacidade);
     ArrayList<Evento> eventos = new ArrayList<>();
     private Valores valores;
 
@@ -86,7 +85,7 @@ public class Estacionamento {
     }
     public void cadastrarValores(float fracao, int desNoturno,int desHora, float diurna, float mensalidade, float evento){
         float descontoHora = desHora/100, descontoNoturno = desNoturno/100;
-        valores = new Valores(fracao,diurna,descontoNoturno,mensalidade,evento,retornoCon,descontoHora);
+        valores = new Valores(fracao,diurna,descontoNoturno,mensalidade,evento,valCon,descontoHora);
     }
 
     public void cadastrarEvento(String nome, Data dataInicio, Data dataFim, Horario horaInicio, Horario horaFim){

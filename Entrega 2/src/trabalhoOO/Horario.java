@@ -34,6 +34,7 @@ public class Horario {
     
     //Função que une a hora com os minutos em uma string
 
+
     //Sets e Gets
     void setHora(int hora){this.hora = hora;}
     void setMinuto(int minuto){this.minuto = minuto;}

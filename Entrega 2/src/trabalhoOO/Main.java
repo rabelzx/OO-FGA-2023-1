@@ -198,18 +198,22 @@ public class Main {
                         StringBuilder mensagemEstacionamentos = new StringBuilder("Estacionamentos encontrados:\n");
                         for (Estacionamento estacionamento : estacionamentosEncontrados) {
                             mensagemEstacionamentos.append("Nome: ").append(estacionamento.getNome()).append("\n");
-                            // Adicione outros detalhes do estacionamento que deseja exibir
+                            mensagemEstacionamentos.append("Hora de abertura: ").append(estacionamento.getAbrir().getHorario()).append("\n");
+                            mensagemEstacionamentos.append("Hora de fechamento: ").append(estacionamento.getFechar().getHorario()).append("\n");
+                            mensagemEstacionamentos.append("capacidade: ").append((estacionamento.acessos.size()+"/")).append(estacionamento.getCapacidade()+"\n");
+                            if (estacionamento.acessos.size()<1){mensagemEstacionamentos.append("nenhum acesso cadastrado");}
+                            else {mensagemEstacionamentos.append("lucro do contratante:").append(estacionamento.calcRetorno());}
+                            // Adicione outras características do estacionamento que deseja exibir
                         }
                         JOptionPane.showMessageDialog(null, mensagemEstacionamentos.toString());
                     }
                     break;
 
                 case 0:
-                    JOptionPane.showMessageDialog(null, "Voltando ao menu principal...");
                     break;
 
                 default:
-                    JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.");
+                    JOptionPane.showMessageDialog(null, "Opção inválida! Tente novamente.");
                     break;
             }
 

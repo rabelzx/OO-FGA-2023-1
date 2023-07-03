@@ -20,7 +20,7 @@ public class Data {
             this.mes = mes;
         }
 
-        if (ano < 1800 || ano > 2023) {
+        if (ano < 1800) {
             throw new RuntimeException("\nAno inserido inválido!\n");
         } else {
             this.ano = ano;
