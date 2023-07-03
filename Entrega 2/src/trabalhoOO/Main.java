@@ -153,18 +153,16 @@ public class Main {
                 case 1:
                     // Buscar acessos por placa
                     String placa = JOptionPane.showInputDialog(null, "Digite a placa a ser buscada:", "Buscar Acessos por Placa", JOptionPane.PLAIN_MESSAGE);
-                    
+
                     ArrayList<Acesso> acessosEncontrados = new ArrayList<>();
                     ArrayList<Estacionamento> estacAcesso = new ArrayList<>();
-                    
-                    
-                    
+
                     for (Estacionamento estac : estacionamentos){
                         for (Acesso acesso : estac.acessos) {
                             if (acesso.getPlaca().equals(placa)) {
                                 acessosEncontrados.add(acesso);
                                 estacAcesso.add(estac);
-                              }
+                            }
                         }
                     }
 
@@ -172,10 +170,12 @@ public class Main {
                         JOptionPane.showMessageDialog(null, "Nenhum acesso encontrado para a placa informada.");
                     } else {
                         StringBuilder mensagemAcessos = new StringBuilder("Acessos encontrados:\n");
-                        for (Acesso acesso : acessosEncontrados) {
-                            mensagemAcessos.append("Placa: ").append(acesso.getPlaca()).append("\n"+estacAcesso.get(acessosEncontrados.indexOf(acesso)).getNome());
-                            
-                            // Adicione outros detalhes do acesso que deseja exibir
+                        for (int i = 0; i < acessosEncontrados.size(); i++) {
+                            Acesso acesso = acessosEncontrados.get(i);
+                            Estacionamento estacionamento = estacAcesso.get(i);
+                            mensagemAcessos.append("Placa: ").append(acesso.getPlaca()).append("\n");
+                            mensagemAcessos.append("Nome do estacionamento: ").append(estacionamento.getNome()).append("\n");
+                            // Adicione outros detalhes do acesso e estacionamento que deseja exibir
                         }
                         JOptionPane.showMessageDialog(null, mensagemAcessos.toString());
                     }
@@ -215,7 +215,6 @@ public class Main {
 
         } while (opcao != 0);
     }
-
     public static void apagarOpcoes(ArrayList<Estacionamento> estacionamentos) {
         int opcao;
 

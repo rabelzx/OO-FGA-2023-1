@@ -8,7 +8,7 @@ public class Estacionamento {
     private String nome;
     private int capacidade;
     private float valCon;
-    private float retornoCon = calcRetorno();
+    private float retornoCon;
     private Horario abrir;
     private Horario fechar;
     ArrayList<Acesso> acessos = new ArrayList<>();
