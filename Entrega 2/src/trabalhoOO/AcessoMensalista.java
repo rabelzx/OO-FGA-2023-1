@@ -11,6 +11,6 @@ public class AcessoMensalista extends Acesso {
     @Override
     public float calcPrice(Horario abrir, Horario fechar, Valores valores) {
         // Lógica de cálculo do valor para acesso mensalista
-    	return valores.getMensalista()*1+checkInOut(getDtEntrada(), getDtSaida());
+    	return valores.getMensalista()*checkInOut(getDtEntrada(), getDtSaida());
     }
 }

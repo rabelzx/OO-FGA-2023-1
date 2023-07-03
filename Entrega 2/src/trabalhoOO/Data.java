@@ -27,6 +27,12 @@ public class Data {
         }
     }
 
+    public Boolean compararDia(Data data){
+        if (data.getDia() == this.dia && data.getMes() == this.mes && data.getAno() == this.ano){
+            return true;
+        }
+        return false;}
+
     public Boolean compararMesAno(Data data){
         if (data.getMes() == this.mes && data.getAno() == this.ano){
             return true;

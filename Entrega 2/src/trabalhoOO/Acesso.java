@@ -30,25 +30,23 @@ public class Acesso {
     //calculo apenas para valores de fracao e hora cheia
     public float calcPrice(Horario abrir, Horario fechar, Valores valores) {
         int tempoPermanencia =  Horario.diferencaMinutos(entrada, saida);
-        	if(tempoPermanencia > 0 && tempoPermanencia < 60) {
-				int valorFracao = tempoPermanencia / 15; 
-				return valorFracao * valores.getFracao();
-			}else {
-				int horasCheias = tempoPermanencia / 60; 
-				int fracaoCheia = (tempoPermanencia - horasCheias * 60) / 15;
-				return horasCheias * valores.getHora_cheia() + fracaoCheia * valores.getFracao();   
-			} 
+        if(tempoPermanencia > 0 && tempoPermanencia < 60) {
+            int valorFracao = tempoPermanencia / 15;
+            return valorFracao * valores.getFracao();
+        }else {
+            int horasCheias = tempoPermanencia / 60;
+            int fracaoCheia = (tempoPermanencia - horasCheias * 60) / 15;
+            return horasCheias * valores.getHora_cheia() + fracaoCheia * valores.getFracao();
+        } 
     }
 
-    public static int checkInOut(Data entrada, Data saida){
-        int diferenca = 0;
+    public static int checkInOut(Data entrada, Data saida){//Retorna quantos meses um acesso passou de
+        int mes = 0;
         if (entrada.compararMesAno(saida)){}
-        else if (entrada.getAno() < saida.getAno()){
-            diferenca = (saida.getMes()+12)*(saida.getAno()-entrada.getAno()) - entrada.getMes();
-        }else {
-            diferenca = saida.getMes() - entrada.getMes();
+        else{
+            mes = (saida.getMes()+12*(saida.getAno()-entrada.getAno())) - entrada.getMes();
         }
-        return diferenca;
+        return mes+1;
     }
     // --------------------getters e setters----------------------------
     
@@ -110,6 +108,6 @@ public class Acesso {
     }
     
     public Data getDtSaida() {
-    	return dtSaida; 
+        return dtSaida; 
     }
 }
