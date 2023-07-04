@@ -20,7 +20,7 @@ public class Acesso {
         this.saida = saida;
         this.dtEntrada = dtEntrada;
         this.dtSaida = dtSaida; 
-        this.valorTotal = calcPrice(abrir,fechar, valores);
+        this.valorTotal = calcPrice(abrir, fechar, valores);
     }
 
     public Acesso(String placa, Horario entrada, Horario saida, Valores valores, Horario abrir, Horario fechar) {
@@ -29,16 +29,21 @@ public class Acesso {
 
     //calculo apenas para valores de fracao e hora cheia
     public float calcPrice(Horario abrir, Horario fechar, Valores valores) {
-        int tempoPermanencia =  Horario.diferencaMinutos(entrada, saida);
-        if(tempoPermanencia > 0 && tempoPermanencia < 60) {
+        int tempoPermanencia = Horario.diferencaMinutos(entrada, saida);
+
+        if (tempoPermanencia > 0 && tempoPermanencia < 60) {
             int valorFracao = tempoPermanencia / 15;
             return valorFracao * valores.getFracao();
-        }else {
+        } else {
             int horasCheias = tempoPermanencia / 60;
             int fracaoCheia = (tempoPermanencia - horasCheias * 60) / 15;
-            return horasCheias * valores.getHora_cheia() + fracaoCheia * valores.getFracao();
-        } 
+            float valorHoraCheia = horasCheias * valores.getHora_cheia();
+            float valorFracaoCheia = fracaoCheia * valores.getFracao();
+            return valorHoraCheia + valorFracaoCheia; // POR ALGUM MOTIVO getHora_cheia só vem zerado
+        }
     }
+
+
 
     public static int checkInOut(Data entrada, Data saida){//Retorna quantos meses um acesso passou de
         int mes = 0;

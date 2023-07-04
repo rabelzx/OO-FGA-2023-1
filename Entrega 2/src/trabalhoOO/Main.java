@@ -66,12 +66,12 @@ public class Main {
                     String nomeEstacionamento = JOptionPane.showInputDialog(null, "Insira o nome do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
                     int capacidade = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a capacidade do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
                     int horaAbertura = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de abertura do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
-                    int minutosAbertura = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de abertura do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
+                    int minutosAbertura =  Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de abertura do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
 
 
-                    Horario horarioAbertura = new Horario(horaAbertura, minutosAbertura);//Se a verificação passar ele instancia
+                    Horario horarioAbertura =  new Horario(horaAbertura, minutosAbertura);//Se a verificação passar ele instancia
                     int horaEncerramento = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de encerramento do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
-                    int minutosEncerramento = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de encerramento do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
+                    int minutosEncerramento =  Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de encerramento do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
                     //Verifica se existem erros no Horário de Fechamento
 
                     Horario horarioEncerramento = new Horario(horaEncerramento, minutosEncerramento);//Se a verificação passar ele instancia
@@ -83,7 +83,6 @@ public class Main {
                     int descontoNoturna = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o desconto da diária noturna:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
                     float mensalidade = Float.parseFloat(JOptionPane.showInputDialog(null, "Insira o valor da mensalidade:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
                     float valorEvento = Float.parseFloat(JOptionPane.showInputDialog(null, "Insirao valor do evento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE));
-
 
                     Estacionamento estacionamentoNovo = new Estacionamento(nomeEstacionamento, capacidade, horarioAbertura, horarioEncerramento, valorContratante/100);
                     estacionamentoNovo.cadastrarValores(fracao,  descontoNoturna, descontaHora, diurna, mensalidade, valorEvento );
@@ -123,7 +122,33 @@ public class Main {
                 	JOptionPane.showMessageDialog(null, "Acesso cadastrado com sucesso!");
                     break;
                 case 3:
+                	int j = escolhaEstacionamento(estacionamentos);
+                	
                 	String evento = JOptionPane.showInputDialog(null, "Insira o nome do evento:", "Cadastar Evento", JOptionPane.PLAIN_MESSAGE);
+                	
+                	int diaInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                	int mesInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                	int anoInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                	
+                 	int diaFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                	int mesFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                	int anoFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                	
+                	int horaInicio =  Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                	int minutosInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                	
+                	int horaFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de encerramento do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                	int minutosFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de encerramento do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                	
+                	 Data dtInicio = new Data(diaInicio, mesInicio, anoInicio); 
+                     Data dtFim = new Data(diaFim, mesFim, anoFim); 
+                	
+                	Horario inicio = new Horario(horaInicio, minutosInicio); 
+                    Horario fim = new Horario(horaFim, minutosFim); 
+                    
+                    estacionamentos.get(j).cadastrarEvento(evento, dtInicio, dtFim, inicio, fim);
+                    JOptionPane.showMessageDialog(null, "Evento cadastrado com sucesso!");
+                    
                 	break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "Voltando ao menu principal...");
@@ -172,7 +197,11 @@ public class Main {
                             Acesso acesso = acessosEncontrados.get(i);
                             Estacionamento estacionamento = estacAcesso.get(i);
                             mensagemAcessos.append("Placa: ").append(acesso.getPlaca()).append("\n");
-                            mensagemAcessos.append("Nome do estacionamento: ").append(estacionamento.getNome()).append("\n");
+                            mensagemAcessos.append("Estacionamento: ").append(estacionamento.getNome()).append("\n");
+                            mensagemAcessos.append("Entrada: ").append(acesso.getEntrada().getHora()).append(":").append(acesso.getEntrada().getMinuto()).append("\n"); 
+                            mensagemAcessos.append("Saída: ").append(acesso.getSaida().getHora()).append(":").append(acesso.getSaida().getMinuto()).append("\n");
+                            mensagemAcessos.append("Valor do acesso: ").append(acesso.getValorTotal()).append("\n"); 
+                            mensagemAcessos.append("----------------------------------------\n\n"); 
                             // Adicione outros detalhes do acesso e estacionamento que deseja exibir
                         }
                         JOptionPane.showMessageDialog(null, mensagemAcessos.toString());
