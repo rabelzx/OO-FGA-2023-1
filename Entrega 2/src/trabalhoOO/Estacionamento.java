@@ -95,17 +95,31 @@ public class Estacionamento {
 
     //Calcula o retorno d contratante
     public float calcRetorno() {
-        System.out.println(valCon);
-        int retorno = 0;
+
+        float retorno = 0;
         ArrayList<String> placas = new ArrayList<>();
+
+
+
+
         for (int i = 0; i < acessos.size(); i++) {
             if (acessos.get(i).getClass() == AcessoMensalista.class) {
                 if (placas.equals(acessos.get(i).getPlaca())) ;
                 else {
-                    placas.add(acessos.get(i).getPlaca());
+                    AcessoMensalista mensal = (AcessoMensalista) acessos.get(i);
+                    retorno += mensal.calcPrice(abrir, fechar, valores);
+
                 }
-            } else {
+            } else if (acessos.get(i).getClass() == AcessoEvento.class) {
+                AcessoEvento evento = (AcessoEvento) acessos.get(i);
+                retorno += evento.calcPrice(abrir, fechar, valores);
+            } else if (acessos.get(i).getClass() == AcessoDiaria.class) {
+                AcessoDiaria diaria = (AcessoDiaria) acessos.get(i);
+                retorno += diaria.calcPrice(abrir, fechar, valores);
+            } else{
                 retorno += acessos.get(i).calcPrice(abrir, fechar, valores);
+
+                System.out.println(retorno);
             }
         }
 
@@ -157,7 +171,8 @@ public class Estacionamento {
             }
 
         }
-        return retorno;}
+
+        return retorno*valCon;}
 
     //====================================================================================
     //Sets e Gets
