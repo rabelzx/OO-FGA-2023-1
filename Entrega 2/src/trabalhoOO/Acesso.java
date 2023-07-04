@@ -30,7 +30,7 @@ public class Acesso {
     //calculo apenas para valores de fracao e hora cheia
     public float calcPrice(Horario abrir, Horario fechar, Valores valores) {
         int tempoPermanencia = Horario.diferencaMinutos(entrada, saida);
-
+        
         if (tempoPermanencia > 0 && tempoPermanencia < 60) {
             int valorFracao = tempoPermanencia / 15;
             return valorFracao * valores.getFracao();
@@ -39,7 +39,7 @@ public class Acesso {
             int fracaoCheia = (tempoPermanencia - horasCheias * 60) / 15;
             float valorHoraCheia = horasCheias * valores.getHora_cheia();
             float valorFracaoCheia = fracaoCheia * valores.getFracao();
-            return valorHoraCheia + valorFracaoCheia; // POR ALGUM MOTIVO getHora_cheia só vem zerado
+            return valorHoraCheia + valorFracaoCheia;
         }
     }
 
