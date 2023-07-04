@@ -201,7 +201,7 @@ public class Main {
                             mensagemEstacionamentos.append("capacidade: ").append((estacionamento.acessos.size()+"/")).append(estacionamento.getCapacidade()+"\n");
                             if (estacionamento.acessos.size()<1){mensagemEstacionamentos.append("nenhum acesso cadastrado");}
                             else {mensagemEstacionamentos.append("lucro do contratante:").append(estacionamento.calcRetorno());}
-                            // Adicione outras características do estacionamento que deseja exibir
+                            //  Adicione outras características do estacionamento que deseja exibir
                         }
                         JOptionPane.showMessageDialog(null, mensagemEstacionamentos.toString());
                     }
