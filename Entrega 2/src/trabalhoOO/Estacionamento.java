@@ -59,7 +59,7 @@ public class Estacionamento {
                     && (saida.getHora() <= abrir.getHora() && saida.getMinuto() <= abrir.getMinuto()))){
             acessos.add(new AcessoDiaria(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
         } else{
-            acessos.add(new Acesso(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
+            acessos.add(new AcessoFracaoHora(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
         }
 
 

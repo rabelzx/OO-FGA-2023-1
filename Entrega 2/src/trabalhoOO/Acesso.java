@@ -1,6 +1,6 @@
 package trabalhoOO;
 
-public class Acesso {
+public abstract class Acesso {
     private String placa;
     private boolean chkEvent;
     private boolean chkMens;
@@ -8,54 +8,40 @@ public class Acesso {
     private Horario entrada;
     private Horario saida;
     private Data dtEntrada;
-    private Data dtSaida; 
+    private Data dtSaida;
 
-    //construtor vazio
-    public Acesso() {}
+    // construtor vazio
+    public Acesso() {
+    }
 
-    //construtor
+    // construtor
     public Acesso(String placa, Horario entrada, Horario saida, Data dtEntrada, Data dtSaida, Valores valores, Horario abrir, Horario fechar) {
         this.placa = placa;
         this.entrada = entrada;
         this.saida = saida;
         this.dtEntrada = dtEntrada;
-        this.dtSaida = dtSaida; 
+        this.dtSaida = dtSaida;
         this.valorTotal = calcPrice(abrir, fechar, valores);
     }
 
     public Acesso(String placa, Horario entrada, Horario saida, Valores valores, Horario abrir, Horario fechar) {
-
     }
 
-    //calculo apenas para valores de fracao e hora cheia
-    public float calcPrice(Horario abrir, Horario fechar, Valores valores) {
-        int tempoPermanencia = Horario.diferencaMinutos(entrada, saida);
-        
-        if (tempoPermanencia > 0 && tempoPermanencia < 60) {
-            int valorFracao = tempoPermanencia / 15;
-            return valorFracao * valores.getFracao();
-        } else {
-            int horasCheias = tempoPermanencia / 60;
-            int fracaoCheia = (tempoPermanencia - horasCheias * 60) / 15;
-            float valorHoraCheia = horasCheias * valores.getHora_cheia();
-            float valorFracaoCheia = fracaoCheia * valores.getFracao();
-            return valorHoraCheia + valorFracaoCheia;
-        }
-    }
+    // método abstrato que será sobreescrito
+    public abstract float calcPrice(Horario abrir, Horario fechar, Valores valores);
 
-
-
-    public static int checkInOut(Data entrada, Data saida){//Retorna quantos meses um acesso passou de
+    public static int checkInOut(Data entrada, Data saida) {
         int mes = 0;
-        if (entrada.compararMesAno(saida)){}
-        else{
-            mes = (saida.getMes()+12*(saida.getAno()-entrada.getAno())) - entrada.getMes();
+        if (entrada.compararMesAno(saida)) {
+        } else {
+            mes = (saida.getMes() + 12 * (saida.getAno() - entrada.getAno())) - entrada.getMes();
         }
-        return mes+1;
+        return mes + 1;
     }
+
     // --------------------getters e setters----------------------------
-    
-    //placa
+
+    // placa
     public String getPlaca() {
         return placa;
     }
@@ -64,7 +50,7 @@ public class Acesso {
         this.placa = placa;
     }
 
-    //chkEvent
+    // chkEvent
     public boolean getChkEvent() {
         return chkEvent;
     }
@@ -73,7 +59,7 @@ public class Acesso {
         this.chkEvent = chkEvent;
     }
 
-    //chkMens
+    // chkMens
     public boolean getChkMens() {
         return chkMens;
     }
@@ -81,8 +67,8 @@ public class Acesso {
     public void setChkMens(boolean chkMens) {
         this.chkMens = chkMens;
     }
-    
-    //valorTotal
+
+    // valorTotal
     public float getValorTotal() {
         return valorTotal;
     }
@@ -91,7 +77,7 @@ public class Acesso {
         this.valorTotal = valorTotal;
     }
 
-    //in e out
+    // in e out
     public Horario getEntrada() {
         return entrada;
     }
@@ -111,8 +97,9 @@ public class Acesso {
     public Data getDtEntrada() {
         return dtEntrada;
     }
-    
+
     public Data getDtSaida() {
-        return dtSaida; 
+        return dtSaida;
     }
 }
+
