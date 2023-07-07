@@ -58,8 +58,10 @@ public class Estacionamento {
         } else if (Horario.diferencaMinutos(entrada, saida) > 540 || ((entrada.getHora() >= fechar.getHora() && entrada.getMinuto() >= fechar.getMinuto())
                     && (saida.getHora() <= abrir.getHora() && saida.getMinuto() <= abrir.getMinuto()))){
             acessos.add(new AcessoDiaria(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
-        } else{
+        } else if (Horario.diferencaMinutos(entrada,saida) > 0 &&  Horario.diferencaMinutos(entrada,saida) < 60){
             acessos.add(new AcessoFracaoHora(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
+        }else {
+            acessos.add(new AcessoHoraCheia(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
         }
 
 
@@ -113,16 +115,9 @@ public class Estacionamento {
                     retorno += mensal.calcPrice(abrir, fechar, valores);
 
                 }
-            } else if (acessos.get(i).getClass() == AcessoEvento.class) {
-                AcessoEvento evento = (AcessoEvento) acessos.get(i);
-                retorno += evento.calcPrice(abrir, fechar, valores);
-            } else if (acessos.get(i).getClass() == AcessoDiaria.class) {
-                AcessoDiaria diaria = (AcessoDiaria) acessos.get(i);
-                retorno += diaria.calcPrice(abrir, fechar, valores);
             } else{
                 retorno += acessos.get(i).calcPrice(abrir, fechar, valores);
 
-                System.out.println(retorno);
             }
         }
 
