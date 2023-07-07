@@ -27,29 +27,7 @@ public class Estacionamento {
 
     }
     
-    public boolean acessoEvento(ArrayList<Evento> eventos, Data dtAcesso){
-        
-        
-        for (Evento event : eventos){
-            Data inicioEvento = event.getDtInicio();
-            Data fimEvento = event.getDtFim();
-            if (dtAcesso.getMes() == inicioEvento.getMes() || dtAcesso.getMes() == fimEvento.getMes()){
-                if(dtAcesso.getAno() == inicioEvento.getAno() || dtAcesso.getAno() == fimEvento.getAno()){
-                    if (inicioEvento.getMes() != fimEvento.getMes()){
-                        if(dtAcesso.getDia() >= inicioEvento.getDia() || dtAcesso.getDia() <= fimEvento.getDia()){
-                            return true;
-                        }
-                    else if(inicioEvento.getMes() == fimEvento.getMes()){
-                        if(dtAcesso.getDia() >= inicioEvento.getDia() && dtAcesso.getDia() <= fimEvento.getDia()){
-                            return true;
-                        }
-                    }
-                    }
-                }
-            }
-        }
-        return false;
-    }
+   //Cadastro de Acessos
     public void cadastrarAcesso(String placa, Boolean mensalista,Data dtEntrada, Data dtSaida, Horario entrada, Horario saida) {
         if (mensalista) {
             acessos.add(new AcessoMensalista(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
@@ -64,8 +42,7 @@ public class Estacionamento {
             acessos.add(new AcessoHoraCheia(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
         }
 
-
-
+    //Apaga acesssos já feitos
     }
     public void apagarAcesso(){
         if (this.acessos.isEmpty()) {
@@ -85,6 +62,7 @@ public class Estacionamento {
             }
         }
     }
+    //Cadastra os preços do estacionamento
     public void cadastrarValores(float fracao, float desNoturno, float desHora, float diurna, float mensalidade, float evento){
     	
         float descontoHora = desHora / 100; 
@@ -92,13 +70,13 @@ public class Estacionamento {
      
         valores = new Valores(fracao, diurna, descontoNoturno, mensalidade, evento, valCon, descontoHora);
     }
-
+    //Cadastra os eventos que vão ocorrer
     public void cadastrarEvento(String nome, Data dataInicio, Data dataFim, Horario horaInicio, Horario horaFim){
         eventos.add(new Evento(nome,dataInicio,dataFim,horaInicio,horaFim));
     }
 
 
-    //Calcula o retorno d contratante
+    //Calcula o retorno do contratante
     public float calcRetorno() {
 
         float retorno = 0;
@@ -171,7 +149,30 @@ public class Estacionamento {
         }
 
         return retorno*valCon;}
-
+     //Verifica se um acesso é do tipo Eventos
+    public boolean acessoEvento(ArrayList<Evento> eventos, Data dtAcesso){
+        
+        
+        for (Evento event : eventos){
+            Data inicioEvento = event.getDtInicio();
+            Data fimEvento = event.getDtFim();
+            if (dtAcesso.getMes() == inicioEvento.getMes() || dtAcesso.getMes() == fimEvento.getMes()){
+                if(dtAcesso.getAno() == inicioEvento.getAno() || dtAcesso.getAno() == fimEvento.getAno()){
+                    if (inicioEvento.getMes() != fimEvento.getMes()){
+                        if(dtAcesso.getDia() >= inicioEvento.getDia() || dtAcesso.getDia() <= fimEvento.getDia()){
+                            return true;
+                        }
+                    else if(inicioEvento.getMes() == fimEvento.getMes()){
+                        if(dtAcesso.getDia() >= inicioEvento.getDia() && dtAcesso.getDia() <= fimEvento.getDia()){
+                            return true;
+                        }
+                    }
+                    }
+                }
+            }
+        }
+        return false;
+    }
     //====================================================================================
     //Sets e Gets
     //====================================================================================
