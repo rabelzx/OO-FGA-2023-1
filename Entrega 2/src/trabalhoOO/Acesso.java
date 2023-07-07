@@ -2,9 +2,6 @@ package trabalhoOO;
 
 public abstract class Acesso {
     private String placa;
-    private boolean chkEvent;
-    private boolean chkMens;
-    private float valorTotal;
     private Horario entrada;
     private Horario saida;
     private Data dtEntrada;
@@ -21,7 +18,6 @@ public abstract class Acesso {
         this.saida = saida;
         this.dtEntrada = dtEntrada;
         this.dtSaida = dtSaida;
-        this.valorTotal = calcPrice(abrir, fechar, valores);
     }
 
     public Acesso(String placa, Horario entrada, Horario saida, Valores valores, Horario abrir, Horario fechar) {
