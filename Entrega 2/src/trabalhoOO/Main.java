@@ -200,7 +200,7 @@ public class Main {
                             mensagemAcessos.append("Estacionamento: ").append(estacionamento.getNome()).append("\n");
                             mensagemAcessos.append("Entrada: ").append(acesso.getEntrada().getHora()).append(":").append(acesso.getEntrada().getMinuto()).append("\n"); 
                             mensagemAcessos.append("Saída: ").append(acesso.getSaida().getHora()).append(":").append(acesso.getSaida().getMinuto()).append("\n");
-                            mensagemAcessos.append("Valor do acesso: ").append(acesso.getValorTotal()).append("\n"); 
+                            mensagemAcessos.append("Valor do acesso: ").append(acesso.calcPrice(estacionamento.getAbrir(),estacionamento.getFechar(),estacionamento.getValores())).append("\n");
                             mensagemAcessos.append("----------------------------------------\n\n"); 
                             // Adicione outros detalhes do acesso e estacionamento que deseja exibir
                         }

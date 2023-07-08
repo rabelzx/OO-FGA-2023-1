@@ -45,35 +45,6 @@ public abstract class Acesso {
     public void setPlaca(String placa) {
         this.placa = placa;
     }
-
-    // chkEvent
-    public boolean getChkEvent() {
-        return chkEvent;
-    }
-
-    public void setChkEvent(boolean chkEvent) {
-        this.chkEvent = chkEvent;
-    }
-
-    // chkMens
-    public boolean getChkMens() {
-        return chkMens;
-    }
-
-    public void setChkMens(boolean chkMens) {
-        this.chkMens = chkMens;
-    }
-
-    // valorTotal
-    public float getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(float valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    // in e out
     public Horario getEntrada() {
         return entrada;
     }

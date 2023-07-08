@@ -186,6 +186,8 @@ public class Estacionamento {
 
     void  setValCon(float valCon){this.valCon = valCon;}
 
+    void setValores(Valores valores){this.valores = valores;}
+
     String getNome(){return nome;}
 
     Horario getAbrir(){return abrir;}
@@ -193,6 +195,8 @@ public class Estacionamento {
     Horario getFechar(){return fechar;}
 
     int getCapacidade(){return capacidade;}
+
+    Valores getValores(){return valores;}
 
 }
 
