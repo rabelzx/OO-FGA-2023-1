@@ -1,28 +1,59 @@
 
 package trabalhoOO;
 
+import javax.swing.*;
+
 public class Horario {
     private int hora;
     private int minuto;
 
     public Horario(){}
 
-    public Horario(int hora){
-        if (hora >= 24 || hora < 0){
-            throw new RuntimeException("\na Hora inserida é invalida!!\n");}
-        else {
-            this.hora = hora;
+    public Horario(int hora) {
+        try {
+            if (hora >= 24 || hora < 0){
+                throw new HorarioInvalidoException(hora);
+            }
+            else {
+                this.hora = hora;
 
+            }
+        }catch (HorarioInvalidoException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+            if (hora>= 24){
+                this.hora = 23;
+                this.minuto =59;
+                JOptionPane.showMessageDialog(null,"A hora foi definida como '23' por ser o mais próximo!");
+
+            }else{
+                this.hora = 0;
+                this.minuto =0;
+
+                JOptionPane.showMessageDialog(null,"A hora foi definida como '00' por ser o mais próximo!");
+            }
         }
+
     }
-    public Horario(int hora, int minuto){
+    public Horario(int hora, int minuto) {
         this(hora);
-        if (minuto >= 60 || minuto < 0) {
-            throw new RuntimeException("\nO minuto inserido é invalido!!\n");
-        }else {
-            this.minuto = minuto;
+        try {
+            if (minuto >= 60 || minuto < 0) {
+                throw new HorarioInvalidoException(hora,minuto);
+            }else {
+                this.minuto = minuto;
 
+            }
+        }catch (HorarioInvalidoException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+            if (minuto >= 60){
+                this.minuto =59;
+                JOptionPane.showMessageDialog(null,"Os minutos foram definidos como '59' por ser o mais próximo!");
+            }else {
+                this.minuto = 0;
+                JOptionPane.showMessageDialog(null,"Os minutos foram definidos como '00' por ser o mais próximo!");
+            }
         }
+
     }
     
     //Função para calcular a diferença de tempo em minutos
