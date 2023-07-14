@@ -17,8 +17,11 @@ public class Estacionamento {
 
     public Estacionamento() {} //Padrão
 
-    public Estacionamento(String nome, int capacidade, Horario abrir,Horario fechar, float valCon) {
-
+    public Estacionamento(String nome, int capacidade, Horario abrir,Horario fechar, float valCon) throws ValorAcessoInvalidoException {
+    	if(capacidade <= 0 || valCon <= 0) {
+    		throw new ValorAcessoInvalidoException(); 
+    	}
+   
         this.capacidade = capacidade;
         this.abrir = abrir;
         this.fechar = fechar;
@@ -63,13 +66,17 @@ public class Estacionamento {
         }
     }
     //Cadastra os preços do estacionamento
-    public void cadastrarValores(float fracao, float desNoturno, float desHora, float diurna, float mensalidade, float evento){
+    public void cadastrarValores(float fracao, float desNoturno, float desHora, float diurna, float mensalidade, float evento) throws ValorAcessoInvalidoException {
+    	if (fracao <= 0 || diurna <= 0 || desNoturno <= 0 || mensalidade <= 0 || evento <= 0 || desHora <= 0) {
+    	    throw new ValorAcessoInvalidoException(); 
+    	}
     	
         float descontoHora = desHora / 100; 
         float descontoNoturno = desNoturno / 100;
      
         valores = new Valores(fracao, diurna, descontoNoturno, mensalidade, evento, valCon, descontoHora);
     }
+    
     //Cadastra os eventos que vão ocorrer
     public void cadastrarEvento(String nome, Data dataInicio, Data dataFim, Horario horaInicio, Horario horaFim){
         eventos.add(new Evento(nome,dataInicio,dataFim,horaInicio,horaFim));

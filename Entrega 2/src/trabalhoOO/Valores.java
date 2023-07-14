@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package trabalhoOO;
 
-/**
- *
- * @author breno
- */
 public class Valores {
     private float fracao, hora_cheia,   
                   diurna, noturna,
@@ -16,7 +8,9 @@ public class Valores {
     
     public Valores(){}
 
-    public Valores(float fracao, float diurna,float desNoturno, float mensalista, float evento, float retorno, float desHora) {
+    public Valores(float fracao, float diurna,float desNoturno, float mensalista, float evento, float retorno, float desHora){
+    	
+
         this.fracao = fracao;
         this.diurna = diurna;
         this.mensalista = mensalista;

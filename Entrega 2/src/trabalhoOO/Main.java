@@ -66,8 +66,7 @@ public class Main {
                     String cadastro[] = new String[13];
 
                     cadastro[0] = JOptionPane.showInputDialog(null, "Insira o nome do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
-                    cadastro[1] = JOptionPane.showInputDialog(null, "Insira a capacidade do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
-
+                    
                     //Horarios
 
                     cadastro[2] = JOptionPane.showInputDialog(null, "Insira a hora de abertura do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
@@ -76,27 +75,37 @@ public class Main {
                     cadastro[5] = JOptionPane.showInputDialog(null, "Insira os minutos de encerramento do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
 
 
-                    //Valores Float
-                    cadastro[6] = JOptionPane.showInputDialog(null, "Insira a porcentagem de retorno do contratante:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
-                    cadastro[7] = JOptionPane.showInputDialog(null, "Insira o valor da fracao:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
-                    cadastro[8] = JOptionPane.showInputDialog(null, "Insira a porcentagem de desconta da hora cheia:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
-                    cadastro[9] = JOptionPane.showInputDialog(null, "Insira o valor da diária:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
-                    cadastro[10] = JOptionPane.showInputDialog(null, "Insira o desconto da diária noturna:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
-                    cadastro[11] = JOptionPane.showInputDialog(null, "Insira o valor da mensalidade:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
-                    cadastro[12] = JOptionPane.showInputDialog(null, "Insira o valor do evento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
-                    //7 campos
+                    Horario horarioAbertura =  new Horario(Integer.parseInt(cadastro[2]), Integer.parseInt(cadastro[3]));
+                    Horario horarioEncerramento = new Horario(Integer.parseInt(cadastro[4]), Integer.parseInt(cadastro[5]));
+
+                    boolean valoresValidos = false;
+                    while (!valoresValidos) {
+                        try {
+                            // Valores Float
+                        	cadastro[1] = JOptionPane.showInputDialog(null, "Insira a capacidade do estacionamento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
+                            cadastro[6] = JOptionPane.showInputDialog(null, "Insira a porcentagem de retorno do contratante:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
+                            cadastro[7] = JOptionPane.showInputDialog(null, "Insira o valor da fracao:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
+                            cadastro[8] = JOptionPane.showInputDialog(null, "Insira a porcentagem de desconta da hora cheia:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
+                            cadastro[9] = JOptionPane.showInputDialog(null, "Insira o valor da diária:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
+                            cadastro[10] = JOptionPane.showInputDialog(null, "Insira o desconto da diária noturna:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
+                            cadastro[11] = JOptionPane.showInputDialog(null, "Insira o valor da mensalidade:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
+                            cadastro[12] = JOptionPane.showInputDialog(null, "Insira o valor do evento:", "Cadastrar Estacionamento", JOptionPane.PLAIN_MESSAGE);
+
+                            Estacionamento estacionamentoNovo = new Estacionamento(cadastro[0], Integer.parseInt(cadastro[1]), horarioAbertura, horarioEncerramento, Float.parseFloat(cadastro[6]) / 100);
+                            estacionamentoNovo.cadastrarValores(Float.parseFloat(cadastro[7]), Float.parseFloat(cadastro[10]), Float.parseFloat(cadastro[8]), Float.parseFloat(cadastro[9]), Float.parseFloat(cadastro[11]), Float.parseFloat(cadastro[12]));
+                            estacionamentos.add(estacionamentoNovo);
+                            valoresValidos = true; // Valores cadastrados com sucesso, encerra o loop
+                        } catch (ValorAcessoInvalidoException e) {
+                            JOptionPane.showMessageDialog(null, e.toString());
+                        }
+                    }
+       
                     try {
                         for (int i = 0; i < cadastro.length; i++){
                             if (cadastro[i].length() == 0){
                                 throw new DescricaoEmBrancoException();
                             }
                         }
-                        Horario horarioAbertura =  new Horario(Integer.parseInt(cadastro[2]), Integer.parseInt(cadastro[3]));
-                        Horario horarioEncerramento = new Horario(Integer.parseInt(cadastro[4]), Integer.parseInt(cadastro[5]));
-
-                        Estacionamento estacionamentoNovo = new Estacionamento(cadastro[0], Integer.parseInt(cadastro[1]), horarioAbertura, horarioEncerramento, Float.parseFloat(cadastro[6])/100);
-                        estacionamentoNovo.cadastrarValores(Float.parseFloat(cadastro[7]),  Float.parseFloat(cadastro[10]), Float.parseFloat(cadastro[8]), Float.parseFloat(cadastro[9]), Float.parseFloat(cadastro[11]), Float.parseFloat(cadastro[12]) );
-                        estacionamentos.add(estacionamentoNovo);
                         JOptionPane.showMessageDialog(null, "Estacionamento cadastrado com sucesso!");
 
                     }catch (DescricaoEmBrancoException e){
