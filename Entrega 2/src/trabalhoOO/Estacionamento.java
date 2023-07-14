@@ -31,10 +31,10 @@ public class Estacionamento {
     }
     
    //Cadastro de Acessos
-    public void cadastrarAcesso(String placa, Boolean mensalista,Data dtEntrada, Data dtSaida, Horario entrada, Horario saida) {
+    public void cadastrarAcesso(String placa, Boolean mensalista, Boolean evento, Data dtEntrada, Data dtSaida, Horario entrada, Horario saida) {
         if (mensalista) {
             acessos.add(new AcessoMensalista(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
-        } else if (acessoEvento(eventos, dtEntrada)) {
+        } else if (evento) {
             acessos.add(new AcessoEvento(placa, entrada, saida, dtEntrada, dtSaida, valores, abrir, fechar));
         } else if (Horario.diferencaMinutos(entrada, saida) > 540 || ((entrada.getHora() >= fechar.getHora() && entrada.getMinuto() >= fechar.getMinuto())
                     && (saida.getHora() <= abrir.getHora() && saida.getMinuto() <= abrir.getMinuto()))){
@@ -156,30 +156,7 @@ public class Estacionamento {
         }
 
         return retorno*valCon;}
-     //Verifica se um acesso é do tipo Eventos
-    public boolean acessoEvento(ArrayList<Evento> eventos, Data dtAcesso){
-        
-        
-        for (Evento event : eventos){
-            Data inicioEvento = event.getDtInicio();
-            Data fimEvento = event.getDtFim();
-            if (dtAcesso.getMes() == inicioEvento.getMes() || dtAcesso.getMes() == fimEvento.getMes()){
-                if(dtAcesso.getAno() == inicioEvento.getAno() || dtAcesso.getAno() == fimEvento.getAno()){
-                    if (inicioEvento.getMes() != fimEvento.getMes()){
-                        if(dtAcesso.getDia() >= inicioEvento.getDia() || dtAcesso.getDia() <= fimEvento.getDia()){
-                            return true;
-                        }
-                    else if(inicioEvento.getMes() == fimEvento.getMes()){
-                        if(dtAcesso.getDia() >= inicioEvento.getDia() && dtAcesso.getDia() <= fimEvento.getDia()){
-                            return true;
-                        }
-                    }
-                    }
-                }
-            }
-        }
-        return false;
-    }
+   
     //====================================================================================
     //Sets e Gets
     //====================================================================================

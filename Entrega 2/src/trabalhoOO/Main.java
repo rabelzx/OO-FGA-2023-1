@@ -136,7 +136,15 @@ public class Main {
                     //Mensalista
                     int mensalistaResposta = JOptionPane.showOptionDialog(null, "O acesso é do tipo mensalista", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sim", "Não"}, null);
                     boolean mensChk = (mensalistaResposta == JOptionPane.YES_OPTION);
-
+                    
+                    //caso o acesso nao seja do tipo mensalista, ele pergunta se é do tipo evento
+                    boolean evntChk = false; 
+                    if(!mensChk) {
+	                	int eventoResposta = JOptionPane.showOptionDialog(null, "O acesso é do tipo evento", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sim", "Não"}, null);
+	                    evntChk = (eventoResposta == JOptionPane.YES_OPTION);
+                    }
+                    
+                    
                         for (int j = 0; j < cadastroA.length; j++) {
                             if (cadastroA[j].length() == 0) {
                                 throw new DescricaoEmBrancoException();
@@ -148,7 +156,7 @@ public class Main {
                     Horario entrada = new Horario(Integer.parseInt(cadastroA[1]), Integer.parseInt(cadastroA[2]));
                     Horario saida = new Horario(Integer.parseInt(cadastroA[3]), Integer.parseInt(cadastroA[4]));
 
-                        estacionamentos.get(i).cadastrarAcesso(cadastroA[0], mensChk, dtEntrada, dtSaida, entrada, saida);
+                        estacionamentos.get(i).cadastrarAcesso(cadastroA[0], mensChk, evntChk, dtEntrada, dtSaida, entrada, saida);
                         JOptionPane.showMessageDialog(null, "Acesso cadastrado com sucesso!");
 
                     } catch(DescricaoEmBrancoException e ) {
