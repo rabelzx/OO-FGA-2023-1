@@ -171,47 +171,36 @@ public class Main {
                     Data dtInicio = null;
                     Data dtFim = null;
 
-  
-                    boolean dataEventoValida = false;
-                    while (!dataEventoValida) {
                         try {
+                        //Data Inicio
                             int diaInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
                             int mesInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
                             int anoInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
                             dtInicio = new Data(diaInicio, mesInicio, anoInicio);
-                            dataEventoValida = true; // A data é válida, então podemos sair do loop
-                        } catch (DataInvalidaException e) {
-                            JOptionPane.showMessageDialog(null, e.toString());
-                        }
-                    }
-
-                    
-                    dataEventoValida = false;
-                    while (!dataEventoValida) {
-                    	
-                        try {
+                        //Data fim
                         	int diaFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
                             int mesFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
                             int anoFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
                             dtFim = new Data(diaFim, mesFim, anoFim);
-                            dataEventoValida = true; // A data é válida, então podemos sair do loop
+                        //Hora Inicio
+                            int horaInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                            int minutosInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                        //Hora Fim
+                            int horaFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de encerramento do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                            int minutosFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de encerramento do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+
+
+                            Horario inicio = new Horario(horaInicio, minutosInicio);
+                            Horario fim = new Horario(horaFim, minutosFim);
+
+                            estacionamentos.get(j).cadastrarEvento(evento, dtInicio, dtFim, inicio, fim);
+                            JOptionPane.showMessageDialog(null, "Evento cadastrado com sucesso!");
                         } catch (DataInvalidaException e) {
-                            JOptionPane.showMessageDialog(null, e.toString());
+                            JOptionPane.showMessageDialog(null, e.toString() + "\nEvento não cadastrado...");
+                        } catch (HorarioInvalidoException e) {
+                            JOptionPane.showMessageDialog(null, e.toString() + "\nEvento não cadastrado...");
                         }
-                    }
 
-
-                    int horaInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
-                    int minutosInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
-
-                    int horaFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de encerramento do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
-                    int minutosFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de encerramento do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
-
-                    Horario inicio = new Horario(horaInicio, minutosInicio);
-                    Horario fim = new Horario(horaFim, minutosFim);
-
-                    estacionamentos.get(j).cadastrarEvento(evento, dtInicio, dtFim, inicio, fim);
-                    JOptionPane.showMessageDialog(null, "Evento cadastrado com sucesso!");
 
                     break;
 
