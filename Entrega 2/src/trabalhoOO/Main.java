@@ -195,9 +195,13 @@ public class Main {
 
                             estacionamentos.get(j).cadastrarEvento(evento, dtInicio, dtFim, inicio, fim);
                             JOptionPane.showMessageDialog(null, "Evento cadastrado com sucesso!");
-                        } catch (DataInvalidaException e) {
+
+
+                        }catch (DataInvalidaException e) {
                             JOptionPane.showMessageDialog(null, e.toString() + "\nEvento não cadastrado...");
-                        } catch (HorarioInvalidoException e) {
+                        }catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Caracter invalido inserido...\nEstacionamento não cadastrado...");
+                        }catch (HorarioInvalidoException e) {
                             JOptionPane.showMessageDialog(null, e.toString() + "\nEvento não cadastrado...");
                         }
 
