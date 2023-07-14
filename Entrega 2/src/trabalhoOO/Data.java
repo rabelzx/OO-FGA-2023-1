@@ -7,26 +7,21 @@ public class Data {
 
     public Data() {}
 
-    public Data(int dia, int mes, int ano) {
-        if (dia < 1 || dia > 31) {
-            throw new RuntimeException("\nDia inserido inválido!\n");
-        } else {
-            this.dia = dia;
-        }
-
-        if (mes < 1 || mes > 12) {
-            throw new RuntimeException("\nMês inserido inválido!\n");
-        } else {
-            this.mes = mes;
-        }
-
-        if (ano < 1800) {
-            throw new RuntimeException("\nAno inserido inválido!\n");
-        } else {
-            this.ano = ano;
-        }
+	public Data(int dia, int mes, int ano) throws DataInvalidaException {
+	    if (dia < 1 || dia > 31 || mes < 1 || mes > 12 || ano < 1800) {
+	        throw new DataInvalidaException(dia, mes, ano);
+	    }
+	    this.dia = dia;
+	    this.mes = mes;
+	    this.ano = ano;
+	}
+	
+	public Data(int dia, int mes, int ano, boolean tratarExcecao) {
+        this.dia = dia;
+        this.mes = mes;
+        this.ano = ano;
     }
-
+    
     public Boolean compararDia(Data data){
         if (data.getDia() == this.dia && data.getMes() == this.mes && data.getAno() == this.ano){
             return true;

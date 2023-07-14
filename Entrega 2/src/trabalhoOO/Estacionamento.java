@@ -123,10 +123,10 @@ public class Estacionamento {
                             else if (mes > 12) {      //Em caso de virada de ano
                                 anosPassados++;       //Aumenta a quantidade de anos que se passaram
                                 mes -= 12;            //Reseta o contador do Mês
-                                verificadas.add(new Data(1, mes, acessos.get(i).getDtEntrada().getAno()+anosPassados));
+                                verificadas.add(new Data(1, mes, acessos.get(i).getDtEntrada().getAno()+anosPassados, false));
                             }
                             else {
-                                verificadas.add(new Data(1, mes, acessos.get(i).getDtEntrada().getAno()+anosPassados));
+                                verificadas.add(new Data(1, mes, acessos.get(i).getDtEntrada().getAno()+anosPassados, false));
                             }
                         }while (mes != acessos.get(i).getDtSaida().getMes());
                     }

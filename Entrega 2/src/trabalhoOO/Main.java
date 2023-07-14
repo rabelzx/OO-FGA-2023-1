@@ -105,10 +105,6 @@ public class Main {
                         JOptionPane.showMessageDialog(null, "Caracter invalido inserido...\nEstacionamento não cadastrado...");
                     }
 
-
-
-                    
-
                     break;
                 case 2:
                     int i = escolhaEstacionamento(estacionamentos);
@@ -119,14 +115,38 @@ public class Main {
                     int horaSaida = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de saída do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
                     int minutosSaida = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de saída do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
                     
-                    int diaEntrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do início do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
-                    int mesEntrada =  Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do início do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
-                    int anoEntrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do início do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    Data dtEntrada = null;
+                    Data dtSaida = null;
                     
-                    int diaSaida = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do fim do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
-                    int mesSaida =  Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do fim do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
-                    int anoSaida = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do fim do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
-
+                    boolean dataAcessoValida = false;
+                    while (!dataAcessoValida) {
+                    	
+                    	try {
+                    		int diaEntrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do início do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    		int mesEntrada =  Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do início do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    		int anoEntrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do início do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    		dtEntrada = new Data(diaEntrada, mesEntrada, anoEntrada); 
+                    		dataAcessoValida = true; // A data é válida, então podemos sair do loop
+                    	} catch(DataInvalidaException e) {
+                    		JOptionPane.showMessageDialog(null, e.toString());
+                    	}
+                    }
+                    
+                    dataAcessoValida = false;
+                    while (!dataAcessoValida) {
+                    	
+                    	try {
+                    		int diaSaida = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do fim do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    		int mesSaida =  Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do fim do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    		int anoSaida = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do fim do acesso:", "Cadastrar Acesso", JOptionPane.PLAIN_MESSAGE));
+                    		dtSaida = new Data(diaSaida, mesSaida, anoSaida); 
+                    		dataAcessoValida = true; // A data é válida, então podemos sair do loop
+                    	} catch(DataInvalidaException e) {
+                    		JOptionPane.showMessageDialog(null, e.toString());
+                    	}
+                    }
+                    
+                    
                     //Mensalista
                     int mensalistaResposta = JOptionPane.showOptionDialog(null, "O acesso é do tipo mensalista", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sim", "Não"}, null);
                     boolean mensChk = (mensalistaResposta == JOptionPane.YES_OPTION);
@@ -135,42 +155,64 @@ public class Main {
                     Horario entrada = new Horario(horaEntrada, minutosEntrada); 
                     Horario saida = new Horario(horaSaida, minutosSaida); 
                     
-                    Data dtEntrada = new Data(diaEntrada, mesEntrada, anoEntrada); 
-                    Data dtSaida = new Data(diaSaida, mesSaida, anoSaida); 
 
                     estacionamentos.get(i).cadastrarAcesso(placa, mensChk, dtEntrada, dtSaida, entrada, saida);
 
                     JOptionPane.showMessageDialog(null, "Acesso cadastrado com sucesso!");
                     break;
+                
                 case 3:
                     int j = escolhaEstacionamento(estacionamentos);
 
-                    String evento = JOptionPane.showInputDialog(null, "Insira o nome do evento:", "Cadastar Evento", JOptionPane.PLAIN_MESSAGE);
+                    String evento = JOptionPane.showInputDialog(null, "Insira o nome do evento:", "Cadastrar Evento", JOptionPane.PLAIN_MESSAGE);
 
-                    int diaInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
-                    int mesInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
-                    int anoInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                    Data dtInicio = null;
+                    Data dtFim = null;
 
-                    int diaFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
-                    int mesFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
-                    int anoFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+  
+                    boolean dataEventoValida = false;
+                    while (!dataEventoValida) {
+                        try {
+                            int diaInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                            int mesInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                            int anoInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                            dtInicio = new Data(diaInicio, mesInicio, anoInicio);
+                            dataEventoValida = true; // A data é válida, então podemos sair do loop
+                        } catch (DataInvalidaException e) {
+                            JOptionPane.showMessageDialog(null, e.toString());
+                        }
+                    }
 
-                    int horaInicio =  Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                    
+                    dataEventoValida = false;
+                    while (!dataEventoValida) {
+                    	
+                        try {
+                        	int diaFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                            int mesFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                            int anoFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                            dtFim = new Data(diaFim, mesFim, anoFim);
+                            dataEventoValida = true; // A data é válida, então podemos sair do loop
+                        } catch (DataInvalidaException e) {
+                            JOptionPane.showMessageDialog(null, e.toString());
+                        }
+                    }
+
+
+                    int horaInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
                     int minutosInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
 
                     int horaFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de encerramento do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
                     int minutosFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de encerramento do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
 
-                    Data dtInicio = new Data(diaInicio, mesInicio, anoInicio);
-                     Data dtFim = new Data(diaFim, mesFim, anoFim);
-
                     Horario inicio = new Horario(horaInicio, minutosInicio);
-                    Horario fim = new Horario(horaFim, minutosFim); 
-                    
+                    Horario fim = new Horario(horaFim, minutosFim);
+
                     estacionamentos.get(j).cadastrarEvento(evento, dtInicio, dtFim, inicio, fim);
                     JOptionPane.showMessageDialog(null, "Evento cadastrado com sucesso!");
 
                     break;
+
                 case 0:
                     JOptionPane.showMessageDialog(null, "Voltando ao menu principal...");
                     break;
