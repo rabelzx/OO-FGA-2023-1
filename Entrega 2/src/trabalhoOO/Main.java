@@ -138,7 +138,7 @@ public class Main {
                     boolean mensChk = (mensalistaResposta == JOptionPane.YES_OPTION);
 
                         for (int j = 0; j < cadastroA.length; j++) {
-                            if (cadastroA[i].length() == 0) {
+                            if (cadastroA[j].length() == 0) {
                                 throw new DescricaoEmBrancoException();
                             }
                         }
@@ -164,6 +164,7 @@ public class Main {
                     break;
                 
                 case 3:
+                    String cadastroC[] = new String[10];
                     int j = escolhaEstacionamento(estacionamentos);
 
                     String evento = JOptionPane.showInputDialog(null, "Insira o nome do evento:", "Cadastrar Evento", JOptionPane.PLAIN_MESSAGE);
@@ -173,30 +174,40 @@ public class Main {
 
                         try {
                         //Data Inicio
-                            int diaInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
-                            int mesInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
-                            int anoInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                            cadastroC[0] = JOptionPane.showInputDialog(null, "Insira o dia do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE);
+                            cadastroC[1] =JOptionPane.showInputDialog(null, "Insira o mês do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE);
+                            cadastroC[2] = JOptionPane.showInputDialog(null, "Insira o ano do início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE);
 
                         //Data fim
-                        	int diaFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o dia do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
-                            int mesFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o mês do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
-                            int anoFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o ano do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                            cadastroC[3] = JOptionPane.showInputDialog(null, "Insira o dia do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE);
+                            cadastroC[4] = JOptionPane.showInputDialog(null, "Insira o mês do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE);
+                            cadastroC[5] = JOptionPane.showInputDialog(null, "Insira o ano do fim do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE);
 
                         //Hora Inicio
-                            int horaInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
-                            int minutosInicio = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                            cadastroC[6] = JOptionPane.showInputDialog(null, "Insira a hora de início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE);
+                            cadastroC[7] = JOptionPane.showInputDialog(null, "Insira os minutos de início do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE);
                         //Hora Fim
-                            int horaFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a hora de encerramento do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
-                            int minutosFim = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira os minutos de encerramento do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE));
+                            cadastroC[8] = JOptionPane.showInputDialog(null, "Insira a hora de encerramento do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE);
+                            cadastroC[9] = JOptionPane.showInputDialog(null, "Insira os minutos de encerramento do evento:", "Cadastrar evento", JOptionPane.PLAIN_MESSAGE);
 
-                            dtFim = new Data(diaFim, mesFim, anoFim);
-                            dtInicio = new Data(diaInicio, mesInicio, anoInicio);
-                            Horario inicio = new Horario(horaInicio, minutosInicio);
-                            Horario fim = new Horario(horaFim, minutosFim);
+                            for (int k = 0; k < cadastroC.length; k++) {
+                                if (cadastroC[k].length() == 0) {
+                                    throw new DescricaoEmBrancoException();
+                                }
+                            }
+                            dtFim = new Data(Integer.parseInt(cadastroC[3]), Integer.parseInt(cadastroC[4]), Integer.parseInt(cadastroC[5]));
+                            dtInicio = new Data(Integer.parseInt(cadastroC[0]), Integer.parseInt(cadastroC[1]), Integer.parseInt(cadastroC[2]));
+                            Horario inicio = new Horario(Integer.parseInt(cadastroC[6]), Integer.parseInt(cadastroC[7]));
+                            Horario fim = new Horario(Integer.parseInt(cadastroC[8]), Integer.parseInt(cadastroC[9]));
+
+
+
 
                             estacionamentos.get(j).cadastrarEvento(evento, dtInicio, dtFim, inicio, fim);
                             JOptionPane.showMessageDialog(null, "Evento cadastrado com sucesso!");
 
+                        }catch (DescricaoEmBrancoException e) {
+                            JOptionPane.showMessageDialog(null, e.toString() + "\nEvento não cadastrado...");
 
                         }catch (DataInvalidaException e) {
                             JOptionPane.showMessageDialog(null, e.toString() + "\nEvento não cadastrado...");
