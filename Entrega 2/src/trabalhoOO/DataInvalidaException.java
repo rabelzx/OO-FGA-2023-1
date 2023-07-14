@@ -12,6 +12,6 @@ public class DataInvalidaException extends Exception {
 	}
 	
 	public String toString() {
-		return "A data " + dia + "/" + mes + "/" + ano + " é inválida!\nInsira a data novamente:" ; 
+		return "A data " + dia + "/" + mes + "/" + ano + " é inválida!" ;
 	}
 }

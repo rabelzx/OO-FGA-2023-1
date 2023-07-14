@@ -8,8 +8,8 @@ public class Horario {
 
     public Horario(){}
 
-    public Horario(int hora) {
-        try {
+    public Horario(int hora) throws HorarioInvalidoException {
+
             if (hora >= 24 || hora < 0){
                 throw new HorarioInvalidoException(hora);
             }
@@ -17,23 +17,9 @@ public class Horario {
                 this.hora = hora;
 
             }
-        }catch (HorarioInvalidoException e){
-            JOptionPane.showMessageDialog(null, e.toString());
-            if (hora>= 24){
-                this.hora = 23;
-                this.minuto =59;
-                JOptionPane.showMessageDialog(null,"A hora foi definida como '23' por ser o mais próximo!");
-
-            }else{
-                this.hora = 0;
-                this.minuto =0;
-
-                JOptionPane.showMessageDialog(null,"A hora foi definida como '00' por ser o mais próximo!");
-            }
-        }
 
     }
-    public Horario(int hora, int minuto) {
+    public Horario(int hora, int minuto) throws HorarioInvalidoException {
         this(hora);
         try {
             if (minuto >= 60 || minuto < 0) {

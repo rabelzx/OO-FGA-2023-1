@@ -7,7 +7,7 @@ public class DescricaoEmBrancoException extends Exception{
 
     }
     public String toString() {
-        return "Campo obrigatória deixado em branco";
+        return "Campo obrigatória deixado em branco...";
     }
 
 }
