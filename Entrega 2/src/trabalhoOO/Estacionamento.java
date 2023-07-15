@@ -47,7 +47,7 @@ public class Estacionamento {
 
     //Apaga acesssos já feitos
     }
-    public void apagarAcesso(){
+    public void apagarAcesso() throws ObjetoNaoEncontradoException {
         if (this.acessos.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Não há acessos cadastrados para serem apagados.");
         } else {
@@ -61,7 +61,7 @@ public class Estacionamento {
                 this.acessos.remove(escolhaAcessos);
                 JOptionPane.showMessageDialog(null, "Acesso apagado com sucesso.");
             } else {
-                JOptionPane.showMessageDialog(null, "Opção inválida. Tente novamente.");
+                throw new ObjetoNaoEncontradoException();
             }
         }
     }
